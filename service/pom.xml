@@ -17,6 +17,18 @@
             <groupId>be.dumbo.switchfully</groupId>
             <artifactId>repository</artifactId>
         </dependency>
+        <!--from order solution switchfully-->
+        <dependency>
+            <groupId>be.dumbo.switchfully</groupId>
+            <artifactId>domain</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <!--from order solution switchfully-->
+        <dependency>
+            <groupId>be.dumbo.switchfully</groupId>
+            <artifactId>infrastructure</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
