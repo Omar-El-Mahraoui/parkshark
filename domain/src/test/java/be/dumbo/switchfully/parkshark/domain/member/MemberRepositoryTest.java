@@ -1,6 +1,6 @@
 /*
 
-package be.dumbo.switchfully.parkshark.repository.member;
+package be.dumbo.switchfully.parkshark.domain.member;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

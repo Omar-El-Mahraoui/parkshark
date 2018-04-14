@@ -3,12 +3,14 @@ package be.dumbo.switchfully.parkshark.service.division;
 import be.dumbo.switchfully.parkshark.domain.division.Division;
 
 import javax.inject.Named;
+import java.util.List;
+import java.util.stream.Collectors;
 //copied from order solution switchfully
 
 @Named
 public class DivisionValidator {
 
-    private boolean isARequiredFieldEmptyOrNull(Division division) {
+    private boolean requiredFieldIsEmptyOrNull(Division division) {
         return isNull(division) || isEmptyOrNull(division.getOriginalName())
                 || isEmptyOrNull(division.getName())
                 || isEmptyOrNull(division.getDirector());
@@ -22,8 +24,16 @@ public class DivisionValidator {
         return attribute == null || attribute.isEmpty();
     }
 
-    public boolean isValidForCreation(Division division) {
-        return !isARequiredFieldEmptyOrNull(division);
+    public boolean isValidForCreation(Division division, List<Division> divisions) {
+        return !requiredFieldIsEmptyOrNull(division) && hasValidParentId(division, divisions);
+    }
+
+    private boolean hasValidParentId(Division division, List<Division> divisions) {
+        return division.getParentDivision() == null
+                || divisions.stream()
+                        .map(division1 -> division1.getParentDivision())
+                        .collect(Collectors.toList())
+                        .contains(division.getParentDivision());
     }
 
     public void throwInvalidStateException(Division division, String type) {

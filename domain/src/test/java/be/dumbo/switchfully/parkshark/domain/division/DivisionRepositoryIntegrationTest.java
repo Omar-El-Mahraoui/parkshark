@@ -1,8 +1,6 @@
-package be.dumbo.switchfully.parkshark.repository.division;
+package be.dumbo.switchfully.parkshark.domain.division;
 
 import be.dumbo.switchfully.parkshark.TestApplication;
-import be.dumbo.switchfully.parkshark.domain.division.Division;
-import be.dumbo.switchfully.parkshark.domain.division.DivisionTestBuilder;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +12,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=TestApplication.class)
-public class DivisionRepositoryTest {
+public class DivisionRepositoryIntegrationTest {
 
     @Autowired
     private DivisionRepository divisionRepository;
@@ -32,10 +30,8 @@ public class DivisionRepositoryTest {
 
     @Test
     public void save_createDivisionReturnsDivisionWithId() {
-        divisionRepository.deleteAll();
-
         //GIVEN
-
+        divisionRepository.deleteAll();
         //WHEN
         Division returnedDivision = divisionRepository.save(DivisionTestBuilder.aDivision().build());
         //THEN
@@ -45,9 +41,8 @@ public class DivisionRepositoryTest {
 
     @Test
     public void getAll_returnsAllDivisions() {
-        divisionRepository.deleteAll();
-
         //GIVEN
+        divisionRepository.deleteAll();
         Division division1 = divisionRepository.save(DivisionTestBuilder.aDivision().build());
         //WHEN
         List<Division> retrievedDivisions = divisionRepository.getAll();

@@ -3,7 +3,7 @@ package be.dumbo.switchfully.parkshark.service.division;
 
 import be.dumbo.switchfully.parkshark.TestApplication;
 import be.dumbo.switchfully.parkshark.domain.division.Division;
-import be.dumbo.switchfully.parkshark.repository.division.DivisionRepository;
+import be.dumbo.switchfully.parkshark.domain.division.DivisionRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;

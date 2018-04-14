@@ -1,7 +1,7 @@
 package be.dumbo.switchfully.parkshark.service.member;
 
 import be.dumbo.switchfully.parkshark.domain.member.Member;
-import be.dumbo.switchfully.parkshark.repository.member.MemberRepository;
+import be.dumbo.switchfully.parkshark.domain.member.MemberRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;

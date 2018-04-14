@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>be.dumbo.switchfully</groupId>
-            <artifactId>repository</artifactId>
+            <artifactId>domain</artifactId>
         </dependency>
         <!--from order solution switchfully-->
         <dependency>

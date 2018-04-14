@@ -1,5 +1,5 @@
 /*
-package be.dumbo.switchfully.parkshark.repository.member;
+package be.dumbo.switchfully.parkshark.domain.member;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

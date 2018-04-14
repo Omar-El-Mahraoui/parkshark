@@ -2,7 +2,7 @@ package be.dumbo.switchfully.parkshark.service.division;
 // copied and adapted code from order solution switchfully
 
 import be.dumbo.switchfully.parkshark.domain.division.Division;
-import be.dumbo.switchfully.parkshark.repository.division.DivisionRepository;
+import be.dumbo.switchfully.parkshark.domain.division.DivisionRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -26,7 +26,7 @@ public class DivisionService {
     }
 
     public Division createDivision(Division division) {
-        if (!divisionValidator.isValidForCreation(division)) {
+        if (!divisionValidator.isValidForCreation(division, getAllDivisions())) {
             divisionValidator.throwInvalidStateException(division, "creation");
         }
         return divisionRepository.save(division);

@@ -1,7 +1,7 @@
 package be.dumbo.switchfully.parkshark.service.address;
 
 import be.dumbo.switchfully.parkshark.domain.address.Address;
-import be.dumbo.switchfully.parkshark.repository.address.AddressRepository;
+import be.dumbo.switchfully.parkshark.domain.address.AddressRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;

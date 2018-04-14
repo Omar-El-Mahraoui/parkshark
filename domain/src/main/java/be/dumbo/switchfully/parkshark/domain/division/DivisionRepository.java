@@ -1,4 +1,4 @@
-package be.dumbo.switchfully.parkshark.repository.division;
+package be.dumbo.switchfully.parkshark.domain.division;
 
 import be.dumbo.switchfully.parkshark.domain.division.Division;
 import org.springframework.stereotype.Repository;
