@@ -1,0 +1,1 @@
+download the ojdbc8.jar from oracle website and put the jar file inside libraries on your local machine to be able to run the application.
