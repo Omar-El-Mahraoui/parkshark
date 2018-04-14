@@ -1,7 +1,8 @@
 package be.dumbo.switchfully.parkshark.repository.division;
 
-import be.dumbo.switchfully.parkshark.Application;
+import be.dumbo.switchfully.parkshark.TestApplication;
 import be.dumbo.switchfully.parkshark.domain.division.Division;
+import be.dumbo.switchfully.parkshark.domain.division.DivisionTestBuilder;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=Application.class)
+@SpringBootTest(classes=TestApplication.class)
 public class DivisionRepositoryTest {
 
     @Autowired
@@ -23,7 +24,7 @@ public class DivisionRepositoryTest {
         //GIVEN
 
         //WHEN
-        Division returnedDivision = divisionRepository.save(new Division("DivisionABC","SomeOldName","Maarten Supreme Leader"));
+        Division returnedDivision = divisionRepository.save(DivisionTestBuilder.aDivision().build());
         divisionRepository.deleteAll();
         //THEN
         Assertions.assertThat(divisionRepository.getAll().size()).isEqualTo(0);
@@ -36,7 +37,7 @@ public class DivisionRepositoryTest {
         //GIVEN
 
         //WHEN
-        Division returnedDivision = divisionRepository.save(new Division("DivisionABC","SomeOldName","Maarten Supreme Leader"));
+        Division returnedDivision = divisionRepository.save(DivisionTestBuilder.aDivision().build());
         //THEN
         Assertions.assertThat(returnedDivision).isNotNull();
         Assertions.assertThat(returnedDivision.getId()).isNotZero();
@@ -47,13 +48,11 @@ public class DivisionRepositoryTest {
         divisionRepository.deleteAll();
 
         //GIVEN
-        Division division1 = divisionRepository.save(new Division("DivisionABC","SomeOldName","Maarten Supreme Leader"));
-        Division division2 = divisionRepository.save(new Division("DivisionDEF","SomeOtherOldName","Omar"));
-        Division division3 = divisionRepository.save(new Division("DivisionGHI","SomeLastOldName","Brecht"));
+        Division division1 = divisionRepository.save(DivisionTestBuilder.aDivision().build());
         //WHEN
         List<Division> retrievedDivisions = divisionRepository.getAll();
         //THEN
-        Assertions.assertThat(retrievedDivisions).containsExactlyInAnyOrder(division1,division2,division3);
+        Assertions.assertThat(retrievedDivisions).containsExactlyInAnyOrder(division1);
     }
 
 }

@@ -26,6 +26,9 @@ public class DivisionService {
     }
 
     public Division createDivision(Division division) {
-        return divisionRepository
+        if (!divisionValidator.isValidForCreation(division)) {
+            divisionValidator.throwInvalidStateException(division, "creation");
+        }
+        return divisionRepository.save(division);
     }
 }

@@ -18,4 +18,5 @@
             <artifactId>infrastructure</artifactId>
         </dependency>
     </dependencies>
+
 </project>

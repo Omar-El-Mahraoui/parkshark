@@ -1,18 +1,16 @@
 package be.dumbo.switchfully.parkshark.api.division;
 // copied and adapted code from order solution switchfully
 
-import be.dumbo.switchfully.parkshark.api.member.MemberController;
 import be.dumbo.switchfully.parkshark.service.division.DivisionService;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "/" + MemberController.RESOURCE_NAME)
+@RequestMapping(path = "/" + DivisionController.RESOURCE_NAME)
 public class DivisionController {
 
     public static final String RESOURCE_NAME = "division";
@@ -31,5 +29,12 @@ public class DivisionController {
         return divisionMapper.toDto(
                 divisionService.createDivision(
                         divisionMapper.toDomain(divisionDto)));
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<DivisionDto> getAllDivisions() {
+        return divisionService.getAllDivisions().stream()
+                .map(division -> divisionMapper.toDto(division))
+                .collect(Collectors.toList());
     }
 }

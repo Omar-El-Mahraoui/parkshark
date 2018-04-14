@@ -25,7 +25,6 @@ public class DivisionRepository {
     }
 
     public void deleteAll() {
-
         entityManager.createQuery("delete from Division d").executeUpdate();
     }
 }

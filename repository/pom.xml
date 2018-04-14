@@ -21,11 +21,6 @@
             <groupId>be.dumbo.switchfully</groupId>
             <artifactId>domain</artifactId>
         </dependency>
-        <dependency>
-            <groupId>be.dumbo.switchfully</groupId>
-            <artifactId>infrastructure</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
 </project>

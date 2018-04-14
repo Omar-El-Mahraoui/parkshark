@@ -18,8 +18,7 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!--Because of license issues, oracle ojdbc is not publicly available on mvncentral -->
-        <!--Therefore, it's included in the GitHub repository and added as a dependency like this -->
+        <!--install ojdbc8 driver from oracle website and put it in "libraries"-->
         <dependency>
             <groupId>oracle</groupId>
             <artifactId>ojdbc8</artifactId>
