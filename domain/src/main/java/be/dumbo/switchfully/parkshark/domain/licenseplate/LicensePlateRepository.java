@@ -1,6 +1,5 @@
 package be.dumbo.switchfully.parkshark.domain.licenseplate;
 
-import be.dumbo.switchfully.parkshark.domain.licenseplate.LicensePlate;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

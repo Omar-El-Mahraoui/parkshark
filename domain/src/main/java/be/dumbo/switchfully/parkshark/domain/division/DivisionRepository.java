@@ -1,6 +1,5 @@
 package be.dumbo.switchfully.parkshark.domain.division;
 
-import be.dumbo.switchfully.parkshark.domain.division.Division;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
