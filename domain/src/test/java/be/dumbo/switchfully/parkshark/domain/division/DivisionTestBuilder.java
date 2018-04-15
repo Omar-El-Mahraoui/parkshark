@@ -22,10 +22,10 @@ public class DivisionTestBuilder extends Builder<Division> {
     }
 
     public static DivisionTestBuilder aDivision() {
-        return new DivisionTestBuilder(division())
+        return new DivisionTestBuilder(division()
                 .withName("division1")
                 .withOriginalName("original-name-1")
-                .withDirector("director1");
+                .withDirector("director1"));
     }
 
     @Override

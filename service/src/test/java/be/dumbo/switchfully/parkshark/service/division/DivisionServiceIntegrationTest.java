@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=TestApplication.class)
@@ -67,20 +68,23 @@ public class DivisionServiceIntegrationTest {
     }
 
     @Test
-    public void createDivision_givenANonExistingParentDivision() {
+    public void createDivision_givenANonExistingParentDivisionId_thenThrowException() {
         //GIVEN
         divisionRepository.deleteAll();
 
-        Division division = DivisionTestBuilder.aDivision().build();
-        divisionRepository.save(DivisionTestBuilder.aDivision().build());
+        Division parentDivision = DivisionTestBuilder.aDivision().build();
+        divisionService.createDivision(parentDivision);
+        Division subDivision = DivisionTestBuilder.aDivision()
+                                                    .withParentDivision(parentDivision.getId() + 1)
+                                                    .build();
 
         //WHEN
-        List<Division> actualResult = divisionService.getAllDivisions();
 
         //THEN
-        assertThat(division.getId()).isEqualTo(null);
-        assertThat(actualResult.get(0)).isNotNull();
-        assertThat(actualResult.get(0)).isEqualToIgnoringGivenFields(division, "id");
+        assertThatExceptionOfType(IllegalStateException.class)
+                .isThrownBy(()->divisionService.createDivision(subDivision))
+                .withMessage("Invalid " + (subDivision == null ? "NULL_ENTITY" : subDivision.getClass().getSimpleName())
+                        + " provided for " + "creation" + ". Provided object: " + (subDivision  == null ? null : subDivision.toString()));
     }
 
 }

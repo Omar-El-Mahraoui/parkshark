@@ -31,7 +31,7 @@ public class DivisionValidator {
     private boolean hasValidParentId(Division division, List<Division> divisions) {
         return division.getParentDivision() == null
                 || divisions.stream()
-                        .map(division1 -> division1.getParentDivision())
+                        .map(division1 -> division1.getId())
                         .collect(Collectors.toList())
                         .contains(division.getParentDivision());
     }
