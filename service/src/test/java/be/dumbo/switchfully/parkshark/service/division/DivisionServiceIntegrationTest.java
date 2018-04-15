@@ -66,4 +66,21 @@ public class DivisionServiceIntegrationTest {
         assertThat(actualResult.get(0)).isEqualToIgnoringGivenFields(division, "id");
     }
 
+    @Test
+    public void createDivision_givenANonExistingParentDivision() {
+        //GIVEN
+        divisionRepository.deleteAll();
+
+        Division division = DivisionTestBuilder.aDivision().build();
+        divisionRepository.save(DivisionTestBuilder.aDivision().build());
+
+        //WHEN
+        List<Division> actualResult = divisionService.getAllDivisions();
+
+        //THEN
+        assertThat(division.getId()).isEqualTo(null);
+        assertThat(actualResult.get(0)).isNotNull();
+        assertThat(actualResult.get(0)).isEqualToIgnoringGivenFields(division, "id");
+    }
+
 }
