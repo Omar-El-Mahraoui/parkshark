@@ -55,7 +55,7 @@ public class DivisionServiceTest {
         Mockito.doThrow(IllegalStateException.class).when(divisionValidatorMock)
                 .throwInvalidStateException(division, "creation");
         expectedException.expect(IllegalStateException.class);
-        
+
         //WHEN
         divisionService.createDivision(division);
 
