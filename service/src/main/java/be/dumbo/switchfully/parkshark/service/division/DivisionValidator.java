@@ -6,7 +6,7 @@ import javax.inject.Named;
 import java.util.List;
 import java.util.stream.Collectors;
 //copied from order solution switchfully
-
+// change this with javax validation http://www.baeldung.com/javax-validation
 @Named
 public class DivisionValidator {
 

@@ -65,5 +65,21 @@ public class DivisionControllerIntegrationTest extends ControllerIntegrationTest
             "Provided object: Division[id=");
     }
 
+    @Test
+    public void getAllDivisions_assertResultIsCorrectlyReturned() {
+        //GIVEN
+        Division divisionInDatabase = divisionRepository.save(DivisionTestBuilder.aDivision().build());
+
+        //WHEN
+        DivisionDto[] allDivisions = new TestRestTemplate()
+                .getForObject(format("http://localhost:%s/%s", getPort(), DivisionController.RESOURCE_NAME),
+                        DivisionDto[].class);
+
+        //THEN
+        assertThat(allDivisions).hasSize(1);
+        assertThat(allDivisions[0]).isEqualToIgnoringGivenFields(divisionMapper.toDto(divisionInDatabase)
+                , "id");
+    }
+
 
 }
