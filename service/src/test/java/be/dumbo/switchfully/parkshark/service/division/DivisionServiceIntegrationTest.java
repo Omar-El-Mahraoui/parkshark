@@ -1,23 +1,19 @@
 package be.dumbo.switchfully.parkshark.service.division;
 
-import be.dumbo.switchfully.parkshark.TestApplication;
 import be.dumbo.switchfully.parkshark.domain.division.Division;
 import be.dumbo.switchfully.parkshark.domain.division.DivisionRepository;
 import be.dumbo.switchfully.parkshark.domain.division.DivisionTestBuilder;
+import be.dumbo.switchfully.parkshark.infrastructure.IntegrationTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes=TestApplication.class)
-public class DivisionServiceIntegrationTest {
+
+public class DivisionServiceIntegrationTest extends IntegrationTest {
 
     @Autowired
     private DivisionRepository divisionRepository;
