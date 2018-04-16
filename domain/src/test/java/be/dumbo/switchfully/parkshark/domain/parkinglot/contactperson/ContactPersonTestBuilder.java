@@ -7,7 +7,7 @@ import be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson.ContactPer
 import be.dumbo.switchfully.parkshark.infrastructure.builder.Builder;
 
 import static be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson.ContactPerson.ContactPersonBuilder.contactPerson;
-import static be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson.TelephoneNumberTestBuilder.aTelephoneNumber;
+import static be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson.PhoneNumberTestBuilder.aPhoneNumber;
 
 public class ContactPersonTestBuilder extends Builder<ContactPerson>{
 
@@ -26,8 +26,7 @@ public class ContactPersonTestBuilder extends Builder<ContactPerson>{
     public static ContactPersonTestBuilder aContactPerson() {
         return new ContactPersonTestBuilder(contactPerson()
                     .withName("contactPerson1")
-                    .withMobilePhoneNumber(aTelephoneNumber().build())
-                    .withTelephoneNumber(aTelephoneNumber().build())
+                    .withPhoneNumber(aPhoneNumber().build())
                     .withEmail(EmailTestBuilder.anEmail().build())
                     .withAddress(AddressTestBuilder.anAddress().build()));
     }
@@ -47,13 +46,8 @@ public class ContactPersonTestBuilder extends Builder<ContactPerson>{
         return this;
     }
 
-    public ContactPersonTestBuilder withMobilePhoneNumber(TelephoneNumber mobilePhoneNumber) {
-        contactPersonBuilder.withMobilePhoneNumber(mobilePhoneNumber);
-        return this;
-    }
-
-    public ContactPersonTestBuilder withTelephoneNumber(TelephoneNumber telephoneNumber) {
-        contactPersonBuilder.withTelephoneNumber(telephoneNumber);
+    public ContactPersonTestBuilder withPhoneNumber(PhoneNumber phoneNumber) {
+        contactPersonBuilder.withPhoneNumber(phoneNumber);
         return this;
     }
 

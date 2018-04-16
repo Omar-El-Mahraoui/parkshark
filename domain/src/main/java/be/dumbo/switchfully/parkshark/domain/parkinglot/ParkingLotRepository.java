@@ -20,4 +20,8 @@ public class ParkingLotRepository {
         return parkingLot;
     }
 
+    public void deleteAll() {
+        entityManager.createQuery("delete from ParkingLot p").executeUpdate();
+    }
+
 }

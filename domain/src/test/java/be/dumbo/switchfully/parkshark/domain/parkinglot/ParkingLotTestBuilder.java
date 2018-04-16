@@ -11,6 +11,8 @@ import be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson.ContactPer
 import be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson.ContactPersonTestBuilder;
 import be.dumbo.switchfully.parkshark.infrastructure.builder.Builder;
 
+import java.math.BigDecimal;
+
 import static be.dumbo.switchfully.parkshark.domain.parkinglot.ParkingLot.ParkingLotBuilder.parkingLot;
 
 public class ParkingLotTestBuilder extends Builder<ParkingLot> {
@@ -32,6 +34,7 @@ public class ParkingLotTestBuilder extends Builder<ParkingLot> {
                         .withName("parkingLot1")
                         .withDivision(DivisionTestBuilder.aDivision().build())
                         .withCapacity(100)
+                        .withPricePerHourInEuro(BigDecimal.valueOf(5))
                         .withContactPerson(ContactPersonTestBuilder.aContactPerson().build())
                         .withAddress(AddressTestBuilder.anAddress().build())
                         .withBuildingType(BuildingType.ABOVE_GROUND));
@@ -39,7 +42,7 @@ public class ParkingLotTestBuilder extends Builder<ParkingLot> {
 
     @Override
     public ParkingLot build() {
-        return null;
+        return parkingLotBuilder.build();
     }
 
     public ParkingLotTestBuilder withId(Integer id) {
@@ -59,6 +62,11 @@ public class ParkingLotTestBuilder extends Builder<ParkingLot> {
 
     public ParkingLotTestBuilder withCapacity(Integer capacity) {
         parkingLotBuilder.withCapacity(capacity);
+        return this;
+    }
+
+    public ParkingLotTestBuilder withPricePerHourInEuro(BigDecimal pricePerHourInEuro) {
+        parkingLotBuilder.withPricePerHourInEuro(pricePerHourInEuro);
         return this;
     }
 

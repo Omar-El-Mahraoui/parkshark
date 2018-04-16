@@ -1,8 +1,13 @@
 package be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson;
 
 import be.dumbo.switchfully.parkshark.domain.address.Address;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
+
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 @Entity
 @Table(name = "CONTACT_PERSONS")
@@ -18,10 +23,7 @@ public class ContactPerson {
     private String name;
 
     @Embedded
-    private TelephoneNumber mobilePhoneNumber;
-
-    @Embedded
-    private TelephoneNumber telephoneNumber;
+    private PhoneNumber phoneNumber;
 
     @Embedded
     private Email email;
@@ -34,18 +36,52 @@ public class ContactPerson {
     public ContactPerson(ContactPersonBuilder contactPersonBuilder) {
         this.id = contactPersonBuilder.id;
         this.name = contactPersonBuilder.name;
-        this.mobilePhoneNumber = contactPersonBuilder.mobilePhoneNumber;
-        this.telephoneNumber = contactPersonBuilder.telephoneNumber;
+        this.phoneNumber = contactPersonBuilder.phoneNumber;
         this.email = contactPersonBuilder.email;
         this.address = contactPersonBuilder.address;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public PhoneNumber getMobilePhoneNumber() {
+        return phoneNumber;
+    }
+
+    public Email getEmail() {
+        return email;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    //copied from provided example codelab02 switchfully orm codelabs
+    @Override
+    public boolean equals(Object other){
+        return EqualsBuilder.reflectionEquals(this, other);
+    }
+
+    @Override
+    public int hashCode(){
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
     }
 
     public static class ContactPersonBuilder {
 
         private Integer id;
         private String name;
-        private TelephoneNumber mobilePhoneNumber;
-        private TelephoneNumber telephoneNumber;
+        private PhoneNumber phoneNumber;
         private Email email;
         private Address address;
 
@@ -69,13 +105,8 @@ public class ContactPerson {
             return this;
         }
 
-        public ContactPersonBuilder withMobilePhoneNumber(TelephoneNumber mobilePhoneNumber) {
-            this.mobilePhoneNumber = mobilePhoneNumber;
-            return this;
-        }
-
-        public ContactPersonBuilder withTelephoneNumber(TelephoneNumber telephoneNumber) {
-            this.telephoneNumber = telephoneNumber;
+        public ContactPersonBuilder withPhoneNumber(PhoneNumber phoneNumber) {
+            this.phoneNumber = phoneNumber;
             return this;
         }
 
