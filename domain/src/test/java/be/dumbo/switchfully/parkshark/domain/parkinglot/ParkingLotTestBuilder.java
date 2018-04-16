@@ -2,9 +2,12 @@ package be.dumbo.switchfully.parkshark.domain.parkinglot;
 
 //copied code from order solution switchfully
 
+import be.dumbo.switchfully.parkshark.domain.address.Address;
 import be.dumbo.switchfully.parkshark.domain.address.AddressTestBuilder;
+import be.dumbo.switchfully.parkshark.domain.division.Division;
 import be.dumbo.switchfully.parkshark.domain.division.DivisionTestBuilder;
 import be.dumbo.switchfully.parkshark.domain.parkinglot.ParkingLot.ParkingLotBuilder;
+import be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson.ContactPerson;
 import be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson.ContactPersonTestBuilder;
 import be.dumbo.switchfully.parkshark.infrastructure.builder.Builder;
 
@@ -37,5 +40,40 @@ public class ParkingLotTestBuilder extends Builder<ParkingLot> {
     @Override
     public ParkingLot build() {
         return null;
+    }
+
+    public ParkingLotTestBuilder withId(Integer id) {
+        parkingLotBuilder.withId(id);
+        return this;
+    }
+
+    public ParkingLotTestBuilder withName(String name) {
+        parkingLotBuilder.withName(name);
+        return this;
+    }
+
+    public ParkingLotTestBuilder withDivision(Division division) {
+        parkingLotBuilder.withDivision(division);
+        return this;
+    }
+
+    public ParkingLotTestBuilder withCapacity(Integer capacity) {
+        parkingLotBuilder.withCapacity(capacity);
+        return this;
+    }
+
+    public ParkingLotTestBuilder withContactPerson(ContactPerson contactPerson) {
+        parkingLotBuilder.withContactPerson(contactPerson);
+        return this;
+    }
+
+    public ParkingLotTestBuilder withAddress(Address address) {
+        parkingLotBuilder.withAddress(address);
+        return this;
+    }
+
+    public ParkingLotTestBuilder withBuildingType(BuildingType buildingType) {
+        parkingLotBuilder.withBuildingType(buildingType);
+        return this;
     }
 }
