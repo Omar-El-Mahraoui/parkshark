@@ -74,8 +74,8 @@ public class ContactPerson {
             return this;
         }
 
-        public ContactPersonBuilder withTelePhoneNumber(TelephoneNumber telePhoneNumber) {
-            this.telephoneNumber = telePhoneNumber;
+        public ContactPersonBuilder withTelephoneNumber(TelephoneNumber telephoneNumber) {
+            this.telephoneNumber = telephoneNumber;
             return this;
         }
 

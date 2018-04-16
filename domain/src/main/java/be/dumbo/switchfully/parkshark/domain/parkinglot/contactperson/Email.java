@@ -21,14 +21,25 @@ public class Email {
     private Email(EmailBuilder emailBuilder) {
         this.localPart = emailBuilder.localPart;
         this.domain = emailBuilder.domain;
-        this.complete = emailBuilder.complete;
+        this.complete = String.format("%s@%s", getLocalPart(), getDomain());;
+    }
+
+    public String getLocalPart() {
+        return localPart;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public String getComplete() {
+        return complete;
     }
 
     public static class EmailBuilder extends Builder<Email> {
 
         private String localPart;
         private String domain;
-        private String complete;
 
         private EmailBuilder() {}
 
@@ -48,11 +59,6 @@ public class Email {
 
         public EmailBuilder withDomain(String domain) {
             this.domain = domain;
-            return this;
-        }
-
-        public EmailBuilder withComplete(String complete) {
-            this.complete = complete;
             return this;
         }
     }

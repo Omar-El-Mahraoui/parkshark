@@ -90,7 +90,7 @@ public class ParkingLot {
 
         private ParkingLotBuilder() {}
 
-        public ParkingLotBuilder parkinLot() {
+        public static ParkingLotBuilder parkingLot() {
             return new ParkingLotBuilder();
         }
 
@@ -114,8 +114,8 @@ public class ParkingLot {
             return this;
         }
 
-        public ParkingLotBuilder withContactPersonId(ContactPerson contactPersonId) {
-            this.contactPerson = contactPersonId;
+        public ParkingLotBuilder withContactPerson(ContactPerson contactPerson) {
+            this.contactPerson = contactPerson;
             return this;
         }
 

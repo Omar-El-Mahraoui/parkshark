@@ -19,9 +19,9 @@ public class TelephoneNumber {
 
     private TelephoneNumber() {}
 
-    private TelephoneNumber(TelephoneNumberBuilder mobilePhoneNumberBuilder) {
-        this.number = mobilePhoneNumberBuilder.getNumber();
-        this.countryCallingCode = mobilePhoneNumberBuilder.getCountryCallingCode();
+    private TelephoneNumber(TelephoneNumberBuilder telephoneNumberBuilder) {
+        this.number = telephoneNumberBuilder.getNumber();
+        this.countryCallingCode = telephoneNumberBuilder.getCountryCallingCode();
     }
 
     public static class TelephoneNumberBuilder extends Builder<TelephoneNumber> {
@@ -31,7 +31,7 @@ public class TelephoneNumber {
 
         private TelephoneNumberBuilder() {}
 
-        public static TelephoneNumberBuilder mobilePhoneNumber() {
+        public static TelephoneNumberBuilder telephoneNumber() {
             return new TelephoneNumberBuilder();
         }
 
