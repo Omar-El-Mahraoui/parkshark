@@ -4,12 +4,10 @@ import be.dumbo.switchfully.parkshark.domain.division.Division;
 import be.dumbo.switchfully.parkshark.domain.division.DivisionRepository;
 import be.dumbo.switchfully.parkshark.domain.division.DivisionTestBuilder;
 import be.dumbo.switchfully.parkshark.infrastructure.ServiceIntegrationTest;
-import org.assertj.core.api.ThrowableAssert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintViolationException;
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -86,7 +84,7 @@ public class DivisionServiceIntegrationTest extends ServiceIntegrationTest {
     }*/
 
     @Test
-    public void createDivision_givenAnNameThatIsNull_thenReturnErrorObjectByControllerExceptionHandler() {
+    public void createDivision_givenANameThatIsNull_thenReturnErrorObjectByControllerExceptionHandler() {
         //GIVEN
         divisionService.deleteAllDivisionsFromDatabase();
         Division division = DivisionTestBuilder.aDivision()

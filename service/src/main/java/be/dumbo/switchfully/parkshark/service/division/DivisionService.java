@@ -3,14 +3,11 @@ package be.dumbo.switchfully.parkshark.service.division;
 
 import be.dumbo.switchfully.parkshark.domain.division.Division;
 import be.dumbo.switchfully.parkshark.domain.division.DivisionRepository;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.List;
 
