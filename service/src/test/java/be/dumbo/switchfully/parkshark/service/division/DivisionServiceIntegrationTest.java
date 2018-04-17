@@ -4,9 +4,12 @@ import be.dumbo.switchfully.parkshark.domain.division.Division;
 import be.dumbo.switchfully.parkshark.domain.division.DivisionRepository;
 import be.dumbo.switchfully.parkshark.domain.division.DivisionTestBuilder;
 import be.dumbo.switchfully.parkshark.infrastructure.ServiceIntegrationTest;
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.ConstraintViolationException;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -62,7 +65,7 @@ public class DivisionServiceIntegrationTest extends ServiceIntegrationTest {
         assertThat(actualResult.get(0)).isEqualToIgnoringGivenFields(division, "id");
     }
 
-    @Test
+    /*@Test
     public void createDivision_givenANonExistingParentDivisionId_thenThrowException() {
         //GIVEN
         divisionRepository.deleteAll();
@@ -80,6 +83,23 @@ public class DivisionServiceIntegrationTest extends ServiceIntegrationTest {
                 .isThrownBy(()->divisionService.createDivision(subDivision))
                 .withMessage("Invalid " + (subDivision == null ? "NULL_ENTITY" : subDivision.getClass().getSimpleName())
                         + " provided for " + "creation" + ". Provided object: " + (subDivision  == null ? null : subDivision.toString()));
+    }*/
+
+    @Test
+    public void createDivision_givenAnNameThatIsNull_thenReturnErrorObjectByControllerExceptionHandler() {
+        //GIVEN
+        divisionService.deleteAllDivisionsFromDatabase();
+        Division division = DivisionTestBuilder.aDivision()
+                .withName(null)
+                .build();
+
+        //WHEN
+        assertThatExceptionOfType(ConstraintViolationException.class)
+            .isThrownBy(()->divisionService.createDivision(division))
+            .withMessageContaining("Name cannot be null.");
+
+        //THEN
+
     }
 
 }

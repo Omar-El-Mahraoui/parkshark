@@ -5,7 +5,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
@@ -31,7 +33,9 @@ public class Division {
     @NotNull(message = "Director cannot be null.")
     private String director;
 
+    //http://www.baeldung.com/spring-mvc-custom-validator
     @Column(name="PARENTDIVISION")
+    @ParentDivisionConstraint
     private Integer parentDivision;
 
     private Division() {

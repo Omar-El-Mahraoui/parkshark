@@ -39,7 +39,7 @@ public class DivisionControllerIntegrationTest extends ControllerIntegrationTest
                 .isEqualToIgnoringGivenFields(divisionDtoGiven, "id");
     }
 
-    @Test
+    /*@Test
     public void createDivision_givenAnInvalidParentId_thenReturnErrorObjectByControllerExceptionHandler() {
         //GIVEN
         divisionService.deleteAllDivisionsFromDatabase();
@@ -60,9 +60,9 @@ public class DivisionControllerIntegrationTest extends ControllerIntegrationTest
         assertThat(error.getUniqueErrorId()).isNotNull().isNotEmpty();
         assertThat(error.getMessage()).contains("Invalid Division provided for creation. " +
             "Provided object: Division[id=");
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void createDivision_givenAnNameThatIsNull_thenReturnErrorObjectByControllerExceptionHandler() {
         //GIVEN
         divisionService.deleteAllDivisionsFromDatabase();
@@ -83,7 +83,7 @@ public class DivisionControllerIntegrationTest extends ControllerIntegrationTest
         assertThat(error.getUniqueErrorId()).isNotNull().isNotEmpty();
         assertThat(error.getMessage()).contains("Invalid Division provided for creation. " +
                 "Provided object: Division[id=");
-    }
+    }*/
 
     @Test
     public void getAllDivisions_assertResultIsCorrectlyReturned() {

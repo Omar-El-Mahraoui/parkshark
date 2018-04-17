@@ -36,7 +36,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler{
 
     //https://stackoverflow.com/questions/36555057/get-field-name-when-javax-validation-constraintviolationexception-is-thrown
     @ExceptionHandler(ConstraintViolationException.class)
-    ResponseEntity<Set<String>> handleConstraintViolation(ConstraintViolationException e) {
+    public ResponseEntity<Set<String>> handleConstraintViolation(ConstraintViolationException e) {
         Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
 
         Set<String> messages = new HashSet<>(constraintViolations.size());
