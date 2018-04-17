@@ -1,13 +1,13 @@
 package be.dumbo.switchfully.parkshark.domain.division;
 
-import be.dumbo.switchfully.parkshark.infrastructure.IntegrationTest;
+import be.dumbo.switchfully.parkshark.infrastructure.RepositoryIntegrationTest;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class DivisionRepositoryIntegrationTest extends IntegrationTest {
+public class DivisionRepositoryIntegrationTest extends RepositoryIntegrationTest {
 
     @Autowired
     private DivisionRepository divisionRepository;

@@ -2,7 +2,6 @@ package be.dumbo.switchfully.parkshark.api.division;
 
 import be.dumbo.switchfully.parkshark.api.interceptors.ControllerExceptionHandler;
 import be.dumbo.switchfully.parkshark.domain.division.Division;
-import be.dumbo.switchfully.parkshark.domain.division.DivisionRepository;
 import be.dumbo.switchfully.parkshark.domain.division.DivisionTestBuilder;
 import be.dumbo.switchfully.parkshark.infrastructure.ControllerIntegrationTest;
 import be.dumbo.switchfully.parkshark.service.division.DivisionService;
@@ -22,14 +21,12 @@ public class DivisionControllerIntegrationTest extends ControllerIntegrationTest
     @Inject
     private DivisionMapper divisionMapper;
     @Inject
-    private DivisionRepository divisionRepository;
-    @Inject
     private DivisionService divisionService;
 
     @Test
     public void createDivision_happyPath() {
         //GIVEN
-        divisionRepository.deleteAll();
+        divisionService.deleteAllDivisionsFromDatabase();
         DivisionDto divisionDtoGiven = divisionMapper.toDto(DivisionTestBuilder.aDivision().build());
 
         //WHEN
@@ -45,7 +42,7 @@ public class DivisionControllerIntegrationTest extends ControllerIntegrationTest
     @Test
     public void createDivision_givenAnInvalidParentId_thenReturnErrorObjectByControllerExceptionHandler() {
         //GIVEN
-        divisionRepository.deleteAll();
+        divisionService.deleteAllDivisionsFromDatabase();
         Division parentDivision = DivisionTestBuilder.aDivision().build();
         divisionService.createDivision(parentDivision);
         Division subDivision = DivisionTestBuilder.aDivision()
@@ -66,9 +63,33 @@ public class DivisionControllerIntegrationTest extends ControllerIntegrationTest
     }
 
     @Test
+    public void createDivision_givenAnNameThatIsNull_thenReturnErrorObjectByControllerExceptionHandler() {
+        //GIVEN
+        divisionService.deleteAllDivisionsFromDatabase();
+        Division parentDivision = DivisionTestBuilder.aDivision().build();
+        divisionService.createDivision(parentDivision);
+        Division subDivision = DivisionTestBuilder.aDivision()
+                .withName(null)
+                .build();
+
+        //WHEN
+        ControllerExceptionHandler.Error error = new TestRestTemplate()
+                .postForObject(format("http://localhost:%s/%s", getPort(), DivisionController.RESOURCE_NAME)
+                        , divisionMapper.toDto(subDivision), ControllerExceptionHandler.Error.class);
+
+        //THEN
+        assertThat(error).isNotNull();
+        assertThat(error.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+        assertThat(error.getUniqueErrorId()).isNotNull().isNotEmpty();
+        assertThat(error.getMessage()).contains("Invalid Division provided for creation. " +
+                "Provided object: Division[id=");
+    }
+
+    @Test
     public void getAllDivisions_assertResultIsCorrectlyReturned() {
         //GIVEN
-        Division divisionInDatabase = divisionRepository.save(DivisionTestBuilder.aDivision().build());
+        divisionService.deleteAllDivisionsFromDatabase();
+        Division divisionInDatabase = divisionService.createDivision(DivisionTestBuilder.aDivision().build());
 
         //WHEN
         DivisionDto[] allDivisions = new TestRestTemplate()

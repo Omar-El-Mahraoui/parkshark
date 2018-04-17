@@ -1,7 +1,7 @@
 package be.dumbo.switchfully.parkshark.api.division;
 
 import be.dumbo.switchfully.parkshark.domain.division.Division;
-import be.dumbo.switchfully.parkshark.infrastructure.IntegrationTest;
+import be.dumbo.switchfully.parkshark.infrastructure.ServiceIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 //copied and adapted code from funiversity exercise solution switchfully
 
-public class DivisionMapperTest extends IntegrationTest {
+public class DivisionMapperTest extends ServiceIntegrationTest {
 
     @Autowired
     private DivisionMapper divisionMapper;

@@ -9,9 +9,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
+
+// javax validation: http://www.baeldung.com/javax-validation
 
 @Entity
 @Table(name = "PARKINGLOTS")
@@ -24,30 +27,37 @@ public class ParkingLot {
     private Integer id;
 
     @Column(name = "NAME")
+    @NotNull(message = "Name cannot be null.")
     private String name;
 
     // https://github.com/cegeka/switchfully/blob/solutions/03-databases/02-ORM/01-jpa/src/main/java/codelab04/be/switchfully/person/Person.java
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "division_id", referencedColumnName = "id")
+    @NotNull(message = "Division cannot be null.")
     private Division division;
 
     @Column(name = "capacity")
+    @NotNull(message = "Capacity cannot be null.")
     private Integer capacity;
 
     @Column(name = "price_per_hour_in_euro")
+    @NotNull(message = "Price cannot be null.")
     private BigDecimal pricePerHourInEuro;
 
     // https://github.com/cegeka/switchfully/blob/solutions/03-databases/02-ORM/01-jpa/src/main/java/codelab04/be/switchfully/person/Person.java
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "contact_person_id", referencedColumnName = "id")
+    @NotNull(message = "Contact person cannot be null.")
     private ContactPerson contactPerson;
 
     @Embedded
+    @NotNull(message = "Address cannot be null.")
     private Address address;
 
     //https://stackoverflow.com/questions/2243730/jpa-hibernate-embedded-and-enum
     //https://stackoverflow.com/questions/9839553/hibernate-map-enum-to-varchar
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Building type cannot be null.")
     private BuildingType buildingType;
 
     private ParkingLot() {}

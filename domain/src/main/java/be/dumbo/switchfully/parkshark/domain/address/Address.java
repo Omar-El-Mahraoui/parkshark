@@ -2,17 +2,25 @@ package be.dumbo.switchfully.parkshark.domain.address;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 
 @Embeddable
 public class Address {
 
     @Column(name="STREET_NAME")
+    @NotNull(message = "Street name cannot be null.")
     private String streetName;
+
     @Column(name="STREET_NUMBER")
+    @NotNull(message = "Street number cannot be null.")
     private String streetNumber;
+
     @Column(name="POSTAL_CODE")
+    @NotNull(message = "Postal code cannot be null.")
     private String postalCode;
+
     @Column(name="LABEL")
+    @NotNull(message = "Label cannot be null.")
     private String label;
 
     private Address() {

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,8 +14,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
@@ -27,6 +32,21 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler{
     @Order(value = 10)
     public Error IllegalStateExceptionHandler(IllegalStateException exception, HttpServletRequest request) {
         return new Error(exception, BAD_REQUEST, request);
+    }
+
+    //https://stackoverflow.com/questions/36555057/get-field-name-when-javax-validation-constraintviolationexception-is-thrown
+    @ExceptionHandler(ConstraintViolationException.class)
+    ResponseEntity<Set<String>> handleConstraintViolation(ConstraintViolationException e) {
+        Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
+
+        Set<String> messages = new HashSet<>(constraintViolations.size());
+        messages.addAll(constraintViolations.stream()
+                .map(constraintViolation -> String.format("%s value '%s' %s", constraintViolation.getPropertyPath(),
+                        constraintViolation.getInvalidValue(), constraintViolation.getMessage()))
+                .collect(Collectors.toList()));
+
+        return new ResponseEntity<>(messages, HttpStatus.BAD_REQUEST);
+
     }
 
     public static class Error {

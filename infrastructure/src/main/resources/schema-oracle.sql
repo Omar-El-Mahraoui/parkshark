@@ -6,7 +6,6 @@
 --GRANT CREATE TABLE TO SHARK;
 --ALTER DATABASE DEFAULT TABLESPACE users;
 --GRANT UNLIMITED TABLESPACE TO SHARK;
---
 --grant CREATE SEQUENCE to SHARK;
 
 --
@@ -25,9 +24,9 @@ drop sequence shark.parkinglots;
 DROP TABLE DIVISIONS;
 CREATE TABLE DIVISIONS (
   id               NUMBER primary key,
-name             VARCHAR2(100),
-originalname     VARCHAR2(100),
-director         VARCHAR2(100),
+name             VARCHAR2(100) not null,
+originalname     VARCHAR2(100) not null,
+director         VARCHAR2(100) not null,
 parentdivision   NUMBER
 );
 

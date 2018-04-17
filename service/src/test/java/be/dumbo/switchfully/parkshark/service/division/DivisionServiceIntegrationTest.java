@@ -3,7 +3,7 @@ package be.dumbo.switchfully.parkshark.service.division;
 import be.dumbo.switchfully.parkshark.domain.division.Division;
 import be.dumbo.switchfully.parkshark.domain.division.DivisionRepository;
 import be.dumbo.switchfully.parkshark.domain.division.DivisionTestBuilder;
-import be.dumbo.switchfully.parkshark.infrastructure.IntegrationTest;
+import be.dumbo.switchfully.parkshark.infrastructure.ServiceIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,8 +12,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-
-public class DivisionServiceIntegrationTest extends IntegrationTest {
+public class DivisionServiceIntegrationTest extends ServiceIntegrationTest {
 
     @Autowired
     private DivisionRepository divisionRepository;

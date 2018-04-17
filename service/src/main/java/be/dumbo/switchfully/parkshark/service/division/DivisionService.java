@@ -3,21 +3,24 @@ package be.dumbo.switchfully.parkshark.service.division;
 
 import be.dumbo.switchfully.parkshark.domain.division.Division;
 import be.dumbo.switchfully.parkshark.domain.division.DivisionRepository;
+import org.springframework.validation.annotation.Validated;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 
 @Named
+@Transactional
+@Validated
 public class DivisionService {
 
     private DivisionRepository divisionRepository;
-    private DivisionValidator divisionValidator;
 
     @Inject
-    public DivisionService(DivisionRepository divisionRepository, DivisionValidator divisionValidator) {
+    public DivisionService(DivisionRepository divisionRepository) {
         this.divisionRepository = divisionRepository;
-        this.divisionValidator = divisionValidator;
     }
 
 
@@ -25,10 +28,14 @@ public class DivisionService {
         return divisionRepository.getAll();
     }
 
-    public Division createDivision(Division division) {
-        if (!divisionValidator.isValidForCreation(division, getAllDivisions())) {
+    public Division createDivision(@Valid Division division) {
+        /*if (!divisionValidator.isValidForCreation(division, getAllDivisions())) {
             divisionValidator.throwInvalidStateException(division, "creation");
-        }
+        }*/
         return divisionRepository.save(division);
+    }
+
+    public void deleteAllDivisionsFromDatabase() {
+        divisionRepository.deleteAll();
     }
 }
