@@ -57,16 +57,16 @@ CREATE SEQUENCE CONTACT_PERSONS_SEQ start with 1 INCREMENT by 1;
 DROP TABLE PARKINGLOTS;
 CREATE TABLE PARKINGLOTS (
 id number primary key,
-name varchar2(100),
-division_id number,
-building_type varchar2(100),
-capacity number,
-price_per_hour_in_euro number,
-contact_person_id number,
-street_name varchar2(100),
-street_number varchar2(100),
-postal_code varchar2(100),
-label varchar2(100),
+name varchar2(100) not null,
+division_id number not null,
+building_type varchar2(100) not null,
+capacity number not null,
+price_per_hour_in_euro number not null,
+contact_person_id number not null,
+street_name varchar2(100) not null,
+street_number varchar2(100) not null,
+postal_code varchar2(100) not null,
+label varchar2(100) not null,
 constraint fk_division_id foreign key (division_id) references divisions(id),
 constraint fk_contact_person_id foreign key (contact_person_id) references contact_persons(id)
 );

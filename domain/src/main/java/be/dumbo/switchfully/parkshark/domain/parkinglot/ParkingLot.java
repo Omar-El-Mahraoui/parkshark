@@ -9,6 +9,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
@@ -28,6 +29,7 @@ public class ParkingLot {
 
     @Column(name = "NAME")
     @NotNull(message = "Name cannot be null.")
+    @NotBlank(message = "Name must be filled in.")
     private String name;
 
     // https://github.com/cegeka/switchfully/blob/solutions/03-databases/02-ORM/01-jpa/src/main/java/codelab04/be/switchfully/person/Person.java
@@ -41,7 +43,6 @@ public class ParkingLot {
     private Integer capacity;
 
     @Column(name = "price_per_hour_in_euro")
-    @NotNull(message = "Price cannot be null.")
     private BigDecimal pricePerHourInEuro;
 
     // https://github.com/cegeka/switchfully/blob/solutions/03-databases/02-ORM/01-jpa/src/main/java/codelab04/be/switchfully/person/Person.java

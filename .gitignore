@@ -5,6 +5,8 @@
 .idea
 out
 *.iml
+*.gz
+*.log
 
 ### Maven ###
 target/

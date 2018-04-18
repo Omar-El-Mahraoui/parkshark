@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
@@ -26,9 +27,11 @@ public class ContactPerson {
     private PhoneNumber phoneNumber;
 
     @Embedded
+    @NotNull
     private Email email;
 
     @Embedded
+    @NotNull(message = "Address cannot be null.")
     private Address address;
 
     private ContactPerson() {}
