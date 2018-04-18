@@ -8,8 +8,11 @@ import be.dumbo.switchfully.parkshark.service.division.DivisionService;
 import org.junit.Test;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConversionException;
 
 import javax.inject.Inject;
+import javax.validation.ConstraintViolationException;
 
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,7 +42,7 @@ public class DivisionControllerIntegrationTest extends ControllerIntegrationTest
                 .isEqualToIgnoringGivenFields(divisionDtoGiven, "id");
     }
 
-    /*@Test
+    @Test
     public void createDivision_givenAnInvalidParentId_thenReturnErrorObjectByControllerExceptionHandler() {
         //GIVEN
         divisionService.deleteAllDivisionsFromDatabase();
@@ -60,14 +63,12 @@ public class DivisionControllerIntegrationTest extends ControllerIntegrationTest
         assertThat(error.getUniqueErrorId()).isNotNull().isNotEmpty();
         assertThat(error.getMessage()).contains("Invalid Division provided for creation. " +
             "Provided object: Division[id=");
-    }*/
+    }
 
-    /*@Test
-    public void createDivision_givenAnNameThatIsNull_thenReturnErrorObjectByControllerExceptionHandler() {
+    @Test
+    public void createDivision_givenANameThatIsNull_thenThrowJavaxValidationException() {
         //GIVEN
         divisionService.deleteAllDivisionsFromDatabase();
-        Division parentDivision = DivisionTestBuilder.aDivision().build();
-        divisionService.createDivision(parentDivision);
         Division subDivision = DivisionTestBuilder.aDivision()
                 .withName(null)
                 .build();
@@ -79,11 +80,8 @@ public class DivisionControllerIntegrationTest extends ControllerIntegrationTest
 
         //THEN
         assertThat(error).isNotNull();
-        assertThat(error.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
-        assertThat(error.getUniqueErrorId()).isNotNull().isNotEmpty();
-        assertThat(error.getMessage()).contains("Invalid Division provided for creation. " +
-                "Provided object: Division[id=");
-    }*/
+        assertThat(error.getMessage()).contains("Name cannot be null.");
+    }
 
     @Test
     public void getAllDivisions_assertResultIsCorrectlyReturned() {

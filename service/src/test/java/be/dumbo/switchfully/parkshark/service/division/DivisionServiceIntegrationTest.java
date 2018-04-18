@@ -63,7 +63,7 @@ public class DivisionServiceIntegrationTest extends ServiceIntegrationTest {
         assertThat(actualResult.get(0)).isEqualToIgnoringGivenFields(division, "id");
     }
 
-    /*@Test
+    @Test
     public void createDivision_givenANonExistingParentDivisionId_thenThrowException() {
         //GIVEN
         divisionRepository.deleteAll();
@@ -81,7 +81,7 @@ public class DivisionServiceIntegrationTest extends ServiceIntegrationTest {
                 .isThrownBy(()->divisionService.createDivision(subDivision))
                 .withMessage("Invalid " + (subDivision == null ? "NULL_ENTITY" : subDivision.getClass().getSimpleName())
                         + " provided for " + "creation" + ". Provided object: " + (subDivision  == null ? null : subDivision.toString()));
-    }*/
+    }
 
     @Test
     public void createDivision_givenANameThatIsNull_thenReturnErrorObjectByControllerExceptionHandler() {
@@ -95,6 +95,23 @@ public class DivisionServiceIntegrationTest extends ServiceIntegrationTest {
         assertThatExceptionOfType(ConstraintViolationException.class)
             .isThrownBy(()->divisionService.createDivision(division))
             .withMessageContaining("Name cannot be null.");
+
+        //THEN
+
+    }
+
+    @Test
+    public void createDivision_givenANameThatIsBlank_thenReturnErrorObjectByControllerExceptionHandler() {
+        //GIVEN
+        divisionService.deleteAllDivisionsFromDatabase();
+        Division division = DivisionTestBuilder.aDivision()
+                .withName("")
+                .build();
+
+        //WHEN
+        assertThatExceptionOfType(ConstraintViolationException.class)
+                .isThrownBy(()->divisionService.createDivision(division))
+                .withMessageContaining("Name must be filled in.");
 
         //THEN
 

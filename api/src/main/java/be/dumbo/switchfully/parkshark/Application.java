@@ -10,4 +10,17 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
+    /*//https://stackoverflow.com/questions/37958145/autowired-gives-null-value-in-custom-constraint-validator
+    @Bean
+    public Validator validator (final AutowireCapableBeanFactory autowireCapableBeanFactory) {
+
+        ValidatorFactory validatorFactory = Validation.byProvider( HibernateValidator.class )
+                .configure().constraintValidatorFactory(new SpringConstraintValidatorFactory(autowireCapableBeanFactory))
+                .buildValidatorFactory();
+        Validator validator = validatorFactory.getValidator();
+
+
+        return validator;
+    }*/
+
 }

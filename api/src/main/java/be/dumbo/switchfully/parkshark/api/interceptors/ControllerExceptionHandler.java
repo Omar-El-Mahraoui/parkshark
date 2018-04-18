@@ -34,7 +34,9 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler{
         return new Error(exception, BAD_REQUEST, request);
     }
 
-    //https://stackoverflow.com/questions/36555057/get-field-name-when-javax-validation-constraintviolationexception-is-thrown
+    /*//https://stackoverflow.com/questions/36555057/get-field-name-when-javax-validation-constraintviolationexception-is-thrown
+    //https://stackoverflow.com/questions/45070642/springboot-doesnt-handle-javax-validation-constraintviolationexception
+    @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Set<String>> handleConstraintViolation(ConstraintViolationException e) {
         Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
@@ -46,7 +48,17 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler{
                 .collect(Collectors.toList()));
 
         return new ResponseEntity<>(messages, HttpStatus.BAD_REQUEST);
+    }*/
 
+    //https://stackoverflow.com/questions/36555057/get-field-name-when-javax-validation-constraintviolationexception-is-thrown
+    //https://stackoverflow.com/questions/45070642/springboot-doesnt-handle-javax-validation-constraintviolationexception
+    @ResponseStatus(BAD_REQUEST)
+    @ExceptionHandler(ConstraintViolationException.class)
+    public Error handleConstraintViolation(ConstraintViolationException e, HttpServletRequest request) {
+        //https://stackoverflow.com/questions/3042060/fastest-way-to-put-contents-of-setstring-to-a-single-string-with-words-separat
+        String constraintViolations = String.join(",", (CharSequence) e.getConstraintViolations());
+
+        return new Error(e, BAD_REQUEST, request);
     }
 
     public static class Error {

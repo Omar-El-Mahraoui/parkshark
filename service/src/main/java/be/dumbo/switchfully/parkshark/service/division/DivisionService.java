@@ -17,10 +17,12 @@ import java.util.List;
 public class DivisionService {
 
     private DivisionRepository divisionRepository;
+    private DivisionValidator divisionValidator;
 
     @Inject
-    public DivisionService(DivisionRepository divisionRepository) {
+    public DivisionService(DivisionRepository divisionRepository, DivisionValidator divisionValidator) {
         this.divisionRepository = divisionRepository;
+        this.divisionValidator = divisionValidator;
     }
 
 
@@ -30,9 +32,9 @@ public class DivisionService {
 
     //http://www.baeldung.com/spring-mvc-custom-validator
     public Division createDivision(@Valid Division division) {
-        /*if (!divisionValidator.isValidForCreation(division, getAllDivisions())) {
+        if (!divisionValidator.isValidForCreation(division, getAllDivisions())) {
             divisionValidator.throwInvalidStateException(division, "creation");
-        }*/
+        }
         /*if(result.hasErrors()) {
             throw new ConstraintViolationException("Invalid parent division id", null);
         }*/

@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
@@ -21,19 +22,21 @@ public class Division {
 
     @Column(name="NAME")
     @NotNull(message = "Name cannot be null.")
+    @NotBlank(message = "Name must be filled in.")
     private String name;
 
     @Column(name="ORIGINALNAME")
     @NotNull(message = "Original name cannot be null.")
+    @NotBlank(message = "Original name must be filled in.")
     private String originalName;
 
     @Column(name="DIRECTOR")
     @NotNull(message = "Director cannot be null.")
+    @NotBlank(message = "Director must be filled in.")
     private String director;
 
     //http://www.baeldung.com/spring-mvc-custom-validator
     @Column(name="PARENTDIVISION")
-    @ParentDivisionConstraint(message = "Invalid parent division id.")
     private Integer parentDivision;
 
     private Division() {
