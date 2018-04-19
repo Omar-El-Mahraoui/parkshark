@@ -1,6 +1,6 @@
+-- copied and adapted code from switchfully-jpa-solution-order
 
 -- following code is to be executed to create the proper user (local)
-
 --CREATE USER SHARK IDENTIFIED BY "SHARK";
 --GRANT CREATE SESSION TO SHARK;
 --GRANT CREATE TABLE TO SHARK;
@@ -8,72 +8,64 @@
 --GRANT UNLIMITED TABLESPACE TO SHARK;
 --grant CREATE SEQUENCE to SHARK;
 
---
-DROP TABLE SHARK.DIVISIONS;
-DROP TABLE SHARK.MEMBERS;
-DROP TABLE SHARK.LICENSEPLATES;
-DROP TABLE SHARK.PARKINGLOTS;
-DROP TABLE SHARK.CONTACT_PERSONS;
-DROP SEQUENCE SHARK.MEMBERS_SEQ;
-DROP SEQUENCE SHARK.DIVISIONS_SEQ;
-DROP SEQUENCE SHARK.LICENSEPLATES_SEQ;
-DROP SEQUENCE SHARK.CONTACT_PERSONS;
-drop sequence shark.parkinglots;
+--DROP TABLES
+DROP TABLE DIVISIONS;
 
 -- DIVISIONS
-DROP TABLE DIVISIONS;
-CREATE TABLE DIVISIONS (
-  id               NUMBER primary key,
-name             VARCHAR2(100) not null,
-originalname     VARCHAR2(100) not null,
-director         VARCHAR2(100) not null,
-parentdivision   NUMBER
-);
+CREATE TABLE DIVISIONS
+  (
+    DIVISIONS_ID              VARCHAR2(100) NOT NULL,
+    DIVISIONS_NAME            VARCHAR2(100) NOT NULL,
+    DIVISIONS_ORIGINAL_NAME   VARCHAR2(100) NOT NULL,
+    DIVISIONS_DIRECTOR        VARCHAR2(100) NOT NULL,
+    DIVISIONS_PARENT_DIVISION VARCHAR2(100),
+    CONSTRAINT DIVISIONS_PK PRIMARY KEY (DIVISIONS_ID),
+    --https://www.techonthenet.com/oracle/unique.php
+    CONSTRAINT DIVISIONS_NAME_UNIQUE UNIQUE (DIVISIONS_NAME)
+  );
 
 
---SEQUENCE DIVISIONS
-DROP SEQUENCE DIVISIONS_SEQ;
-CREATE SEQUENCE DIVISIONS_SEQ start with 1 INCREMENT by 1;
-
---CONTACT_PERSONS
-drop table contact_persons;
-create table contact_persons (
-id number primary key,
-name varchar2(100),
-telephone_number varchar2(100),
-mobile_phone_number varchar2(100),
-email varchar2(100),
-street_name varchar2(100),
-street_number varchar2(100),
-postal_code varchar2(100),
-label varchar2(100)
-);
-
---SEQUENCE CONTACT_PERSONS
-DROP SEQUENCE CONTACT_PERSONS_SEQ;
-CREATE SEQUENCE CONTACT_PERSONS_SEQ start with 1 INCREMENT by 1;
-
---PARKINGLOTS
-DROP TABLE PARKINGLOTS;
-CREATE TABLE PARKINGLOTS (
-id number primary key,
-name varchar2(100) not null,
-division_id number not null,
-building_type varchar2(100) not null,
-capacity number not null,
-price_per_hour_in_euro number not null,
-contact_person_name varchar2(100) not null,
-contact_person_tele_phone_number varchar2(100) not null,
-contact_person_mobile_phone_number varchar2(100) not null,
-contact_person_email varchar2(100) not null,
-street_name varchar2(100) not null,
-street_number varchar2(100) not null,
-postal_code varchar2(100) not null,
-label varchar2(100) not null,
-constraint fk_division_id foreign key (division_id) references divisions(id),
-constraint fk_contact_person_id foreign key (contact_person_id) references contact_persons(id)
-);
-
---SEQUENCE PARKINGLOTS
-DROP SEQUENCE PARKINGLOTS_SEQ;
-CREATE SEQUENCE PARKINGLOTS_SEQ start with 1 INCREMENT by 1;
+----SEQUENCE DIVISIONS
+--DROP SEQUENCE DIVISIONS_SEQ;
+--CREATE SEQUENCE DIVISIONS_SEQ start with 1 INCREMENT BY 1;
+--  --CONTACT_PERSONS
+--  DROP TABLE contact_persons;
+--  CREATE TABLE contact_persons
+--    (
+--      id                  NUMBER PRIMARY KEY,
+--      name                VARCHAR2(100),
+--      telephone_number    VARCHAR2(100),
+--      mobile_phone_number VARCHAR2(100),
+--      email               VARCHAR2(100),
+--      street_name         VARCHAR2(100),
+--      street_number       VARCHAR2(100),
+--      postal_code         VARCHAR2(100),
+--      label               VARCHAR2(100)
+--    );
+--  --SEQUENCE CONTACT_PERSONS
+--  DROP SEQUENCE CONTACT_PERSONS_SEQ;
+--CREATE SEQUENCE CONTACT_PERSONS_SEQ start with 1 INCREMENT BY 1;
+--  --PARKINGLOTS
+--  DROP TABLE PARKINGLOTS;
+--  CREATE TABLE PARKINGLOTS
+--    (
+--      id                                 NUMBER PRIMARY KEY,
+--      name                               VARCHAR2(100) NOT NULL,
+--      division_id                        NUMBER NOT NULL,
+--      building_type                      VARCHAR2(100) NOT NULL,
+--      capacity                           NUMBER NOT NULL,
+--      price_per_hour_in_euro             NUMBER NOT NULL,
+--      contact_person_name                VARCHAR2(100) NOT NULL,
+--      contact_person_tele_phone_number   VARCHAR2(100) NOT NULL,
+--      contact_person_mobile_phone_number VARCHAR2(100) NOT NULL,
+--      contact_person_email               VARCHAR2(100) NOT NULL,
+--      street_name                        VARCHAR2(100) NOT NULL,
+--      street_number                      VARCHAR2(100) NOT NULL,
+--      postal_code                        VARCHAR2(100) NOT NULL,
+--      label                              VARCHAR2(100) NOT NULL,
+--      CONSTRAINT fk_division_id FOREIGN KEY (division_id) REFERENCES divisions(id),
+--      CONSTRAINT fk_contact_person_id FOREIGN KEY (contact_person_id) REFERENCES contact_persons(id)
+--    );
+--  --SEQUENCE PARKINGLOTS
+--  DROP SEQUENCE PARKINGLOTS_SEQ;
+--CREATE SEQUENCE PARKINGLOTS_SEQ start with 1 INCREMENT BY 1;

@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.domain.parkinglot;
 
 import be.dumbo.switchfully.parkshark.infrastructure.RepositoryIntegrationTest;
@@ -14,13 +15,16 @@ public class ParkingLotRepositoryIntegrationTest extends RepositoryIntegrationTe
     @Autowired
     private ParkingLotRepository parkingLotRepository;
 
-    /*//https://docs.jboss.org/hibernate/validator/4.1/reference/en-US/html/validator-customconstraints.html#validator-customconstraints-using
+    */
+/*//*
+/https://docs.jboss.org/hibernate/validator/4.1/reference/en-US/html/validator-customconstraints.html#validator-customconstraints-using
     private static Validator validator;
     @BeforeClass
     public static void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
-    }*/
+    }*//*
+
 
     @Test
     public void deleteAll_givenANonEmptyParkingLotTable_thenDeleteAllParkingLotsFromTheTable() {
@@ -47,7 +51,8 @@ public class ParkingLotRepositoryIntegrationTest extends RepositoryIntegrationTe
         assertThat(parkingLotCreated.getId()).isNotNull();
     }
 
-    /*@Test
+    */
+/*@Test
     public void save_givenAnInvalidParkingLot_thenThrowException() {
         //GIVEN
         parkingLotRepository.deleteAll();
@@ -64,7 +69,8 @@ public class ParkingLotRepositoryIntegrationTest extends RepositoryIntegrationTe
                 validator.validate(parkingLotGiven);
         assertThat("Parking lot is not valid:\n" + StringUtils.join(violationMessages, "\n"))
                 .contains(constraintViolations.iterator().next().getMessage());
-    }*/
+    }*//*
+
 
     @Test
     public void getAll_thenReturnAllParkingLotsInTheDatabase() {
@@ -84,3 +90,4 @@ public class ParkingLotRepositoryIntegrationTest extends RepositoryIntegrationTe
 
 
 }
+*/

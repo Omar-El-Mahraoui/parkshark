@@ -2,7 +2,6 @@ package be.dumbo.switchfully.parkshark.service.division;
 
 import be.dumbo.switchfully.parkshark.domain.division.Division;
 import be.dumbo.switchfully.parkshark.domain.division.DivisionRepository;
-import be.dumbo.switchfully.parkshark.domain.division.DivisionTestBuilder;
 import be.dumbo.switchfully.parkshark.infrastructure.ServiceIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
 
+import static be.dumbo.switchfully.parkshark.domain.division.DivisionTestBuilder.aDivision;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -25,22 +25,13 @@ public class DivisionServiceIntegrationTest extends ServiceIntegrationTest {
         //GIVEN
         divisionRepository.deleteAll();
 
-        Division division1 = DivisionTestBuilder.aDivision().build();
-        assertThat(division1.getId()).isEqualTo(null);
-
-        Division division2 = DivisionTestBuilder.aDivision().build();
-        assertThat(division2.getId()).isEqualTo(null);
-
-        Division division3 = DivisionTestBuilder.aDivision().build();
-        assertThat(division3.getId()).isEqualTo(null);
-
-        divisionRepository.save(DivisionTestBuilder.aDivision().build());
-        divisionRepository.save(DivisionTestBuilder.aDivision().build());
-        divisionRepository.save(DivisionTestBuilder.aDivision().build());
+        Division division1 = divisionRepository.save(aDivision().build());
+        Division division2 = divisionRepository.save(aDivision().withName("name2").build());
+        Division division3 = divisionRepository.save(aDivision().withName("name3").build());
         //WHEN
         List<Division> actualResult = divisionService.getAllDivisions();
         //THEN
-        assertThat(actualResult).hasSize(3);
+        assertThat(actualResult).containsExactlyInAnyOrder(division1, division2, division3);
         assertThat(actualResult.get(0).getId()).isNotNull();
         assertThat(actualResult.get(1).getId()).isNotNull();
         assertThat(actualResult.get(2).getId()).isNotNull();
@@ -50,17 +41,13 @@ public class DivisionServiceIntegrationTest extends ServiceIntegrationTest {
     public void createDivision_happyPath() {
         //GIVEN
         divisionRepository.deleteAll();
-
-        Division division = DivisionTestBuilder.aDivision().build();
-        divisionRepository.save(DivisionTestBuilder.aDivision().build());
+        Division division = divisionService.createDivision(aDivision().build());
 
         //WHEN
         List<Division> actualResult = divisionService.getAllDivisions();
 
         //THEN
-        assertThat(division.getId()).isEqualTo(null);
-        assertThat(actualResult.get(0)).isNotNull();
-        assertThat(actualResult.get(0)).isEqualToIgnoringGivenFields(division, "id");
+        assertThat(actualResult).containsExactlyInAnyOrder(division);
     }
 
     @Test
@@ -68,9 +55,9 @@ public class DivisionServiceIntegrationTest extends ServiceIntegrationTest {
         //GIVEN
         divisionRepository.deleteAll();
 
-        Division parentDivision = DivisionTestBuilder.aDivision().build();
+        Division parentDivision = aDivision().build();
         divisionService.createDivision(parentDivision);
-        Division subDivision = DivisionTestBuilder.aDivision()
+        Division subDivision = aDivision()
                                                     .withParentDivision(parentDivision.getId() + 1)
                                                     .build();
 
@@ -86,8 +73,8 @@ public class DivisionServiceIntegrationTest extends ServiceIntegrationTest {
     @Test
     public void createDivision_givenANameThatIsNull_thenReturnErrorObjectByControllerExceptionHandler() {
         //GIVEN
-        divisionService.deleteAllDivisionsFromDatabase();
-        Division division = DivisionTestBuilder.aDivision()
+        divisionRepository.deleteAll();
+        Division division = aDivision()
                 .withName(null)
                 .build();
 
@@ -103,8 +90,8 @@ public class DivisionServiceIntegrationTest extends ServiceIntegrationTest {
     @Test
     public void createDivision_givenANameThatIsBlank_thenReturnErrorObjectByControllerExceptionHandler() {
         //GIVEN
-        divisionService.deleteAllDivisionsFromDatabase();
-        Division division = DivisionTestBuilder.aDivision()
+        divisionRepository.deleteAll();
+        Division division = aDivision()
                 .withName("")
                 .build();
 
@@ -116,5 +103,18 @@ public class DivisionServiceIntegrationTest extends ServiceIntegrationTest {
         //THEN
 
     }
+
+    /*@Test
+    public void createDivision_givenADivsionWithSameNameAsDivisionInDatabse_thenThrowException() {
+        //GIVEN
+        divisionRepository.deleteAll();
+        divisionRepository.save(aDivision().build());
+
+        //WHEN
+
+        //THEN
+        assertThatExceptionOfType(org.hibernate.exception.ConstraintViolationException.class)
+                .isThrownBy(()->divisionService.createDivision(aDivision().build()));
+    }*/
 
 }

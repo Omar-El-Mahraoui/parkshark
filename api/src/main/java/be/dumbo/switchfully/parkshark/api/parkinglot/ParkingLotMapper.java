@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.api.parkinglot;
 
 import be.dumbo.switchfully.parkshark.api.address.AddressMapper;
@@ -48,3 +49,4 @@ public class ParkingLotMapper extends Mapper<ParkingLotDto, ParkingLot> {
                 .build();
     }
 }
+*/

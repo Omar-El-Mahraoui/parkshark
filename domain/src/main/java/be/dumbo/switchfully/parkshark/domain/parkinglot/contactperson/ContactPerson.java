@@ -13,12 +13,6 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 @Embeddable
 public class ContactPerson {
 
-    /*@Id
-    @Column(name="ID")
-    @SequenceGenerator(name="contactPerson_seq", sequenceName = "CONTACT_PERSONS_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contactPerson_seq")
-    private Integer id;*/
-
     @Column(name = "CONTACT_PERSON_NAME")
     @NotNull(message = "Name cannot be null.")
     private String name;
@@ -54,15 +48,10 @@ public class ContactPerson {
     private ContactPerson() {}
 
     public ContactPerson(ContactPersonBuilder contactPersonBuilder) {
-        this.id = contactPersonBuilder.id;
         this.name = contactPersonBuilder.name;
         this.phoneNumber = contactPersonBuilder.phoneNumber;
         this.email = contactPersonBuilder.email;
         this.address = contactPersonBuilder.address;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public String getName() {
@@ -99,7 +88,6 @@ public class ContactPerson {
 
     public static class ContactPersonBuilder {
 
-        private Integer id;
         private String name;
         private PhoneNumber phoneNumber;
         private Email email;
@@ -113,11 +101,6 @@ public class ContactPerson {
 
         public ContactPerson build() {
             return new ContactPerson(this);
-        }
-
-        public ContactPersonBuilder withId(Integer id) {
-            this.id = id;
-            return this;
         }
 
         public ContactPersonBuilder withName(String name) {

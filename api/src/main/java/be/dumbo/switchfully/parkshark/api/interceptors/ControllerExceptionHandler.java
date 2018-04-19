@@ -2,11 +2,10 @@ package be.dumbo.switchfully.parkshark.api.interceptors;
 
 //copied and adapted code from order solution switchfully
 
+import oracle.jdbc.OracleDatabaseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,12 +13,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
@@ -29,7 +25,6 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler{
     @ExceptionHandler(IllegalStateException.class)
     @ResponseStatus(BAD_REQUEST)
     @ResponseBody
-    @Order(value = 10)
     public Error IllegalStateExceptionHandler(IllegalStateException exception, HttpServletRequest request) {
         return new Error(exception, BAD_REQUEST, request);
     }
@@ -54,11 +49,34 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler{
     //https://stackoverflow.com/questions/45070642/springboot-doesnt-handle-javax-validation-constraintviolationexception
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(ConstraintViolationException.class)
-    public Error handleConstraintViolation(ConstraintViolationException e, HttpServletRequest request) {
+    @ResponseBody
+    public Error handleJavaxConstraintViolationException(ConstraintViolationException exception, HttpServletRequest request) {
         //https://stackoverflow.com/questions/3042060/fastest-way-to-put-contents-of-setstring-to-a-single-string-with-words-separat
-        String constraintViolations = String.join(",", (CharSequence) e.getConstraintViolations());
+        //String constraintViolations = String.join(",", (CharSequence) e.getConstraintViolations());
+        return new Error(exception, BAD_REQUEST, request);
+    }
 
-        return new Error(e, BAD_REQUEST, request);
+    @ResponseStatus(BAD_REQUEST)
+    @ExceptionHandler(org.hibernate.exception.ConstraintViolationException.class)
+    @ResponseBody
+    public Error handleHibernateConstraintViolationException(org.hibernate.exception.ConstraintViolationException exception
+            , HttpServletRequest request) {
+        return new Error(exception, BAD_REQUEST, request);
+    }
+
+    @ResponseStatus(BAD_REQUEST)
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    @ResponseBody
+    public Error handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException exception
+            , HttpServletRequest request) {
+        return new Error(exception, BAD_REQUEST, request);
+    }
+
+    @ResponseStatus(BAD_REQUEST)
+    @ExceptionHandler(OracleDatabaseException.class)
+    @ResponseBody
+    public Error handleOracleDatabaseException(OracleDatabaseException exception, HttpServletRequest request) {
+        return new Error(exception, BAD_REQUEST, request);
     }
 
     public static class Error {

@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.domain.parkinglot;
 
 //copied code from order solution switchfully
@@ -85,3 +86,4 @@ public class ParkingLotTestBuilder extends Builder<ParkingLot> {
         return this;
     }
 }
+*/

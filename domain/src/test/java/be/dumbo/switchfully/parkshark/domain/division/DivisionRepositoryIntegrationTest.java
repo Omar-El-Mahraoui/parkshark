@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+import static be.dumbo.switchfully.parkshark.domain.division.DivisionTestBuilder.aDivision;
+
 public class DivisionRepositoryIntegrationTest extends RepositoryIntegrationTest {
 
     @Autowired
@@ -17,7 +19,7 @@ public class DivisionRepositoryIntegrationTest extends RepositoryIntegrationTest
         //GIVEN
 
         //WHEN
-        Division returnedDivision = divisionRepository.save(DivisionTestBuilder.aDivision().build());
+        Division returnedDivision = divisionRepository.save(aDivision().build());
         divisionRepository.deleteAll();
         //THEN
         Assertions.assertThat(divisionRepository.getAll().size()).isEqualTo(0);
@@ -28,21 +30,22 @@ public class DivisionRepositoryIntegrationTest extends RepositoryIntegrationTest
         //GIVEN
         divisionRepository.deleteAll();
         //WHEN
-        Division returnedDivision = divisionRepository.save(DivisionTestBuilder.aDivision().build());
+        Division returnedDivision = divisionRepository.save(aDivision().build());
         //THEN
         Assertions.assertThat(returnedDivision).isNotNull();
-        Assertions.assertThat(returnedDivision.getId()).isNotZero();
+        Assertions.assertThat(returnedDivision.getId()).isNotNull();
     }
 
     @Test
     public void getAll_returnsAllDivisions() {
         //GIVEN
         divisionRepository.deleteAll();
-        Division division1 = divisionRepository.save(DivisionTestBuilder.aDivision().build());
+        Division division1 = divisionRepository.save(aDivision().build());
+        Division division2 = divisionRepository.save(aDivision().withName("name2").build());
         //WHEN
         List<Division> retrievedDivisions = divisionRepository.getAll();
         //THEN
-        Assertions.assertThat(retrievedDivisions).containsExactlyInAnyOrder(division1);
+        Assertions.assertThat(retrievedDivisions).containsExactlyInAnyOrder(division1, division2);
     }
 
 }

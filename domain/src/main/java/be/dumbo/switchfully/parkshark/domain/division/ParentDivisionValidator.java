@@ -31,8 +31,7 @@ public class ParentDivisionValidator implements ConstraintValidator<ParentDivisi
                 .contains(parentDivisionId);
     }
 
-    */
-/*//*
+//*
 /https://stackoverflow.com/questions/37958145/autowired-gives-null-value-in-custom-constraint-validator
     @Bean
     public Validator validator (final AutowireCapableBeanFactory autowireCapableBeanFactory) {
@@ -44,7 +43,7 @@ public class ParentDivisionValidator implements ConstraintValidator<ParentDivisi
 
 
         return validator;
-    }*//*
+    }
 
 
 }

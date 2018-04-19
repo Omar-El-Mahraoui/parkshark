@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.service.parkinglot;
 
 import be.dumbo.switchfully.parkshark.domain.parkinglot.ParkingLot;
@@ -36,3 +37,4 @@ public class ParkingLotService {
         return parkingLotRepository.save(parkingLot);
     }
 }
+*/

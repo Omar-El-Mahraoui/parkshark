@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.api.parkinglot.contactperson;
 
 //copied from order solution jpa switchfully
@@ -38,3 +39,4 @@ public class ContactPersonMapper extends Mapper<ContactPersonDto,ContactPerson> 
         return null;
     }
 }
+*/

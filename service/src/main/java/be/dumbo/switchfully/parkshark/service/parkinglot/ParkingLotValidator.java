@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.service.parkinglot;
 
 //copied from order solution switchfully
@@ -43,3 +44,4 @@ public class ParkingLotValidator {
     }
 
 }
+*/

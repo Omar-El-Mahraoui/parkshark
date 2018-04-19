@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.api.parkinglot;
 
 // copied and adapted code from switchfully order solution jpa
@@ -42,3 +43,4 @@ public class ParkingLotController {
                         parkingLotMapper.toDomain(parkingLotDto)));
     }
 }
+*/

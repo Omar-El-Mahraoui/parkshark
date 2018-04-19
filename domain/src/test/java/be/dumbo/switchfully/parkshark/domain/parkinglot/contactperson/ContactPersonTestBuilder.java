@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson;
 
 //copied code from order solution switchfully
@@ -36,11 +37,6 @@ public class ContactPersonTestBuilder extends Builder<ContactPerson>{
         return contactPersonBuilder.build();
     }
 
-    public ContactPersonTestBuilder withId(Integer id) {
-        contactPersonBuilder.withId(id);
-        return this;
-    }
-
     public ContactPersonTestBuilder withName(String name) {
         contactPersonBuilder.withName(name);
         return this;
@@ -52,3 +48,4 @@ public class ContactPersonTestBuilder extends Builder<ContactPerson>{
     }
 
 }
+*/

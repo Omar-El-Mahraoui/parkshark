@@ -4,9 +4,13 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
@@ -14,30 +18,35 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 @Table(name="DIVISIONS")
 public class Division {
 
-    @Id
-    @Column(name="ID")
+    /*@Id
+    @Column(name="DIVISION_ID")
     @SequenceGenerator(name="division_seq", sequenceName = "DIVISIONS_SEQ", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "division_seq")
-    private Integer id;
+    private Integer id;*/
 
-    @Column(name="NAME")
+    @Id
+    @Column(name="DIVISIONS_ID")
+    private String id;
+
+    // https://stackoverflow.com/questions/3126769/uniqueconstraint-annotation-in-java
+    @Column(name="DIVISIONS_NAME", unique = true)
     @NotNull(message = "Name cannot be null.")
     @NotBlank(message = "Name must be filled in.")
     private String name;
 
-    @Column(name="ORIGINALNAME")
+    @Column(name="DIVISIONS_ORIGINAL_NAME")
     @NotNull(message = "Original name cannot be null.")
     @NotBlank(message = "Original name must be filled in.")
     private String originalName;
 
-    @Column(name="DIRECTOR")
+    @Column(name="DIVISIONS_DIRECTOR")
     @NotNull(message = "Director cannot be null.")
     @NotBlank(message = "Director must be filled in.")
     private String director;
 
     //http://www.baeldung.com/spring-mvc-custom-validator
-    @Column(name="PARENTDIVISION")
-    private Integer parentDivision;
+    @Column(name="DIVISIONS_PARENT_DIVISION")
+    private String parentDivision;
 
     private Division() {
     }
@@ -62,11 +71,11 @@ public class Division {
         return director;
     }
 
-    public Integer getParentDivision() {
+    public String getParentDivision() {
         return parentDivision;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
@@ -88,23 +97,24 @@ public class Division {
 
     public static class DivisionBuilder {
 
-        private Integer id;
+        private String id;
         private String name;
         private String originalName;
         private String director;
-        private Integer parentDivision;
+        private String parentDivision;
 
         private DivisionBuilder() {}
 
         public static DivisionBuilder division() {
-            return new DivisionBuilder();
+            return new DivisionBuilder()
+                        .withId(UUID.randomUUID().toString());
         }
 
         public Division build() {
             return new Division(this);
         }
 
-        public DivisionBuilder withId(Integer id) {
+        private DivisionBuilder withId(String id) {
             this.id = id;
             return this;
         }
@@ -124,12 +134,12 @@ public class Division {
             return this;
         }
 
-        public DivisionBuilder withParentDivision(Integer parentDivision) {
+        public DivisionBuilder withParentDivision(String parentDivision) {
             this.parentDivision = parentDivision;
             return this;
         }
 
-        private Integer getId() {
+        private String getId() {
             return id;
         }
 
@@ -145,7 +155,7 @@ public class Division {
             return director;
         }
 
-        private Integer getParentDivision() {
+        private String getParentDivision() {
             return parentDivision;
         }
     }

@@ -33,11 +33,6 @@ public class DivisionTestBuilder extends Builder<Division> {
         return divisionBuilder.build();
     }
 
-    public DivisionTestBuilder withId(Integer id) {
-        divisionBuilder.withId(id);
-        return this;
-    }
-
     public DivisionTestBuilder withName(String name) {
         divisionBuilder.withName(name);
         return this;
@@ -53,7 +48,7 @@ public class DivisionTestBuilder extends Builder<Division> {
         return this;
     }
 
-    public DivisionTestBuilder withParentDivision(Integer parentDivision) {
+    public DivisionTestBuilder withParentDivision(String parentDivision) {
         divisionBuilder.withParentDivision(parentDivision);
         return this;
     }

@@ -1,12 +1,18 @@
 package be.dumbo.switchfully.parkshark.api.division;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
+
 public class DivisionDto {
 
-    private Integer id;
+    private String id;
     private String name;
     private String originalName;
     private String director;
-    private Integer parentDivision;
+    private String parentDivision;
 
     private DivisionDto() {}
 
@@ -14,7 +20,7 @@ public class DivisionDto {
         return new DivisionDto();
     }
 
-    public DivisionDto withId(Integer id) {
+    public DivisionDto withId(String id) {
         this.id = id;
         return this;
     }
@@ -34,12 +40,12 @@ public class DivisionDto {
         return this;
     }
 
-    public DivisionDto withParentDivision(Integer parentDivision) {
+    public DivisionDto withParentDivision(String parentDivision) {
         this.parentDivision = parentDivision;
         return this;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
@@ -55,7 +61,23 @@ public class DivisionDto {
         return director;
     }
 
-    public Integer getParentDivision() {
+    public String getParentDivision() {
         return parentDivision;
+    }
+
+    //copied from provided example codelab02 switchfully orm codelabs
+    @Override
+    public boolean equals(Object other){
+        return EqualsBuilder.reflectionEquals(this, other);
+    }
+
+    @Override
+    public int hashCode(){
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
     }
 }

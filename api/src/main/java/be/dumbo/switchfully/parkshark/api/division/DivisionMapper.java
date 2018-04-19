@@ -25,7 +25,6 @@ public class DivisionMapper extends Mapper<DivisionDto,Division> {
     @Override
     public Division toDomain(DivisionDto divisionDto) {
         return division()
-                .withId(divisionDto.getId())
                 .withOriginalName(divisionDto.getOriginalName())
                 .withName(divisionDto.getName())
                 .withDirector(divisionDto.getDirector())

@@ -40,7 +40,7 @@ public class DivisionMapperTest extends ServiceIntegrationTest {
         Division division = divisionMapper.toDomain(divisionDto);
 
         //THEN
-        assertThat(division).isEqualToComparingFieldByField(divisionDto);
+        assertThat(division).isEqualToIgnoringGivenFields(divisionDto, "id");
     }
 
 }

@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson;
 
 import be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson.Email.EmailBuilder;
@@ -38,3 +39,4 @@ public class EmailTestBuilder extends Builder<Email>{
         return this;
     }
 }
+*/

@@ -22,19 +22,19 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 public class ParkingLot {
 
     @Id
-    @Column(name="ID")
+    @Column(name="PARKINGLOT_ID")
     @SequenceGenerator(name="parkinglot_seq", sequenceName = "PARKINGLOTS_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "parkinglot_seq")
     private Integer id;
 
-    @Column(name = "NAME")
+    @Column(name = "PARKINGLOT_NAME")
     @NotNull(message = "Name cannot be null.")
     @NotBlank(message = "Name must be filled in.")
     private String name;
 
     // https://github.com/cegeka/switchfully/blob/solutions/03-databases/02-ORM/01-jpa/src/main/java/codelab04/be/switchfully/person/Person.java
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "division_id", referencedColumnName = "id")
+    //@JoinColumn(name = "division_id", referencedColumnName = "id")
     @NotNull(message = "Division cannot be null.")
     private Division division;
 
@@ -45,16 +45,7 @@ public class ParkingLot {
     @Column(name = "price_per_hour_in_euro")
     private BigDecimal pricePerHourInEuro;
 
-    // https://github.com/cegeka/switchfully/blob/solutions/03-databases/02-ORM/01-jpa/src/main/java/codelab04/be/switchfully/person/Person.java
-    // copied and adapted code from order-jpa-solution-switchfully
     @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "localPart", column = @Column(name = "EMAIL_LOCAL_PART")),
-            @AttributeOverride(name = "domain", column = @Column(name = "EMAIL_DOMAIN")),
-            @AttributeOverride(name = "complete", column = @Column(name = "EMAIL_COMPLETE"))
-    })
-    //@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    //@JoinColumn(name = "contact_person_id", referencedColumnName = "id")
     @NotNull(message = "Contact person cannot be null.")
     private ContactPerson contactPerson;
 

@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.api.parkinglot;
 
 import be.dumbo.switchfully.parkshark.api.address.AddressDto;
@@ -93,3 +94,4 @@ public class ParkingLotDto {
         return buildingType;
     }
 }
+*/

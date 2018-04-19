@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.service.parkinglot;
 
 // copied and adapted code from order dolution jpa solution switchfully
@@ -54,3 +55,4 @@ public class ParkingLotServiceIntegrationTest extends ServiceIntegrationTest {
     }
 
 }
+*/

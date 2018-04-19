@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.api.parkinglot.contactperson;
 
 //copied from order solution jpa switchfully
@@ -31,3 +32,4 @@ public class PhoneNumberDto {
         return mobilePhoneNumber;
     }
 }
+*/

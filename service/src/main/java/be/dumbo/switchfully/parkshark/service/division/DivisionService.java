@@ -40,8 +40,4 @@ public class DivisionService {
         }*/
         return divisionRepository.save(division);
     }
-
-    public void deleteAllDivisionsFromDatabase() {
-        divisionRepository.deleteAll();
-    }
 }
