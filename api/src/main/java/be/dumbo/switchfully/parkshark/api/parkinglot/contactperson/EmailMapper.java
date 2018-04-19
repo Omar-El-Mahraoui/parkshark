@@ -1,5 +1,7 @@
 package be.dumbo.switchfully.parkshark.api.parkinglot.contactperson;
 
+//copied from order solution jpa switchfully
+
 import be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson.Email;
 import be.dumbo.switchfully.parkshark.infrastructure.dto.Mapper;
 

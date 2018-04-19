@@ -1,5 +1,7 @@
 package be.dumbo.switchfully.parkshark.api.parkinglot.contactperson;
 
+//copied from order solution jpa switchfully
+
 public class PhoneNumberDto {
 
     private String telephoneNumber;
