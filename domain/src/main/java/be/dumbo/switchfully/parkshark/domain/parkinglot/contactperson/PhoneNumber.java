@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson;
 
 //copied and adapted code from order solution switchfully
@@ -8,17 +9,24 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
-@Embeddable
+@Entity
+@Table(name = "PHONE_NUMBERS")
 public class PhoneNumber {
 
-    @Column(name = "TELEPHONE_NUMBER")
+    @Id
+    @Column(name = "PHONE_NUMBERS_ID")
+    private String id;
+
+    @Column(name = "PHONE_NUMBERS_TELEPHONE_NUMBER")
     private String telephoneNumber;
 
-    @Column(name = "MOBILE_PHONE_NUMBER")
+    @Column(name = "PHONE_NUMBERS_MOBILE_PHONE_NUMBER")
     private String mobilePhoneNumber;
 
     private PhoneNumber() {}
@@ -80,3 +88,4 @@ public class PhoneNumber {
     }
 
 }
+*/

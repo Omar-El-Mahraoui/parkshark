@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.domain.parkinglot;
 
 import be.dumbo.switchfully.parkshark.domain.address.Address;
@@ -22,27 +23,25 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 public class ParkingLot {
 
     @Id
-    @Column(name="PARKINGLOT_ID")
-    @SequenceGenerator(name="parkinglot_seq", sequenceName = "PARKINGLOTS_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "parkinglot_seq")
-    private Integer id;
+    @Column(name="PARKINGLOTS_ID")
+    private String id;
 
-    @Column(name = "PARKINGLOT_NAME")
+    @Column(name = "PARKINGLOTS_NAME")
     @NotNull(message = "Name cannot be null.")
     @NotBlank(message = "Name must be filled in.")
     private String name;
 
-    // https://github.com/cegeka/switchfully/blob/solutions/03-databases/02-ORM/01-jpa/src/main/java/codelab04/be/switchfully/person/Person.java
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    //@JoinColumn(name = "division_id", referencedColumnName = "id")
-    @NotNull(message = "Division cannot be null.")
-    private Division division;
+    @NotNull(message = "Division id cannot be null.")
+    @NotBlank(message = "Division id must be filled in.")
+    @Column(name = "PARKINGLOTS_DIVISION_ID")
+    private String divisionId;
 
-    @Column(name = "capacity")
+    @Column(name = "PARKINGLOTS_CAPACITY")
     @NotNull(message = "Capacity cannot be null.")
     private Integer capacity;
 
-    @Column(name = "price_per_hour_in_euro")
+    @Column(name = "PARKINGLOTS_PRICE_PER_HOUR_IN_EURO")
+    @NotNull(message = "Price per hour in euro cannot be null.")
     private BigDecimal pricePerHourInEuro;
 
     @Embedded
@@ -72,7 +71,7 @@ public class ParkingLot {
         this.buildingType = parkingLotBuilder.buildingType;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
@@ -122,7 +121,7 @@ public class ParkingLot {
 
     public static class ParkingLotBuilder extends Builder<ParkingLot>{
 
-        private Integer id;
+        private String id;
         private String name;
         private Division division;
         private Integer capacity;
@@ -137,7 +136,7 @@ public class ParkingLot {
             return new ParkingLotBuilder();
         }
 
-        public ParkingLotBuilder withId(Integer id) {
+        public ParkingLotBuilder withId(String id) {
             this.id = id;
             return this;
         }
@@ -184,3 +183,4 @@ public class ParkingLot {
     }
 
 }
+*/

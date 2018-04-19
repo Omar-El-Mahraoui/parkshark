@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.domain.parkinglot;
 
 //copied and adapted code from order solution switchfully
@@ -14,7 +15,9 @@ public class ParkingLotRepository {
     private EntityManager entityManager;
 
     public ParkingLot save(ParkingLot parkingLot) {
-        /*//https://stackoverflow.com/questions/12338463/how-to-handle-bean-validation-exceptions
+        */
+/*//*
+/https://stackoverflow.com/questions/12338463/how-to-handle-bean-validation-exceptions
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<ParkingLot>> constraintViolations = validator.validate(parkingLot);
 
@@ -25,7 +28,8 @@ public class ParkingLotRepository {
                 violationMessages.add(constraintViolation.getPropertyPath() + ": " + constraintViolation.getMessage());
             }
             throw new InvalidDataAccessApiUsageException("Parking lot is not valid:\n" + StringUtils.join(violationMessages, "\n"));
-        }*/
+        }*//*
+
         entityManager.persist(parkingLot);
         return parkingLot;
     }
@@ -38,3 +42,4 @@ public class ParkingLotRepository {
         return entityManager.createQuery("from ParkingLot", ParkingLot.class).getResultList();
     }
 }
+*/

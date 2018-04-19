@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson;
 
 //copied and adapted code from switchfully order solution
@@ -94,3 +95,4 @@ public class Email {
     }
 
 }
+*/

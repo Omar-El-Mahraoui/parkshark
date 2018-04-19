@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson;
 
 import be.dumbo.switchfully.parkshark.domain.address.Address;
@@ -126,3 +127,4 @@ public class ContactPerson {
     }
 
 }
+*/

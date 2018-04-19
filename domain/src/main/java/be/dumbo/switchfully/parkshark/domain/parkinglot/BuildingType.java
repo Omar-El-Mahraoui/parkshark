@@ -1,3 +1,4 @@
+/*
 package be.dumbo.switchfully.parkshark.domain.parkinglot;
 
 public enum BuildingType {
@@ -6,3 +7,4 @@ public enum BuildingType {
     ABOVE_GROUND
 
 }
+*/
