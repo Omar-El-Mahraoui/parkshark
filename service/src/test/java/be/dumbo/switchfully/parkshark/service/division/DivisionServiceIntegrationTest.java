@@ -51,15 +51,15 @@ public class DivisionServiceIntegrationTest extends ServiceIntegrationTest {
     }
 
     @Test
-    public void createDivision_givenANonExistingParentDivisionId_thenThrowException() {
+    public void createDivision_givenANonExistingparentDivisionId_thenThrowException() {
         //GIVEN
         divisionRepository.deleteAll();
 
-        Division parentDivision = aDivision().build();
-        divisionService.createDivision(parentDivision);
+        Division parentDivisionId = aDivision().build();
+        divisionService.createDivision(parentDivisionId);
         Division subDivision = aDivision()
-                                                    .withParentDivision(parentDivision.getId() + 1)
-                                                    .build();
+                                .withParentDivisionId(parentDivisionId.getId() + 1)
+                                .build();
 
         //WHEN
 

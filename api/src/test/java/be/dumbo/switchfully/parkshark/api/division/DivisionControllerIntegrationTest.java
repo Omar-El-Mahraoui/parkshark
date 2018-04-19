@@ -52,7 +52,7 @@ public class DivisionControllerIntegrationTest extends ControllerIntegrationTest
         divisionService.createDivision(parentDivision);
         Division subDivision = aDivision()
                 .withName("name2")
-                .withParentDivision(parentDivision.getId() + 1)
+                .withParentDivisionId(parentDivision.getId() + 1)
                 .build();
 
         //WHEN
@@ -86,6 +86,7 @@ public class DivisionControllerIntegrationTest extends ControllerIntegrationTest
         assertThat(error.getMessage()).contains("Name cannot be null.");
     }
 
+    //rest template doe not give correct result, but alt+F8 does give correct result
     /*@Test
     public void getAllDivisions_assertResultIsCorrectlyReturned() {
         //GIVEN

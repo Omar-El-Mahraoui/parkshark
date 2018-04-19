@@ -12,7 +12,7 @@ public class DivisionDto {
     private String name;
     private String originalName;
     private String director;
-    private String parentDivision;
+    private String parentDivisionId;
 
     private DivisionDto() {}
 
@@ -40,8 +40,8 @@ public class DivisionDto {
         return this;
     }
 
-    public DivisionDto withParentDivision(String parentDivision) {
-        this.parentDivision = parentDivision;
+    public DivisionDto withParentDivisionId(String parentDivisionId) {
+        this.parentDivisionId = parentDivisionId;
         return this;
     }
 
@@ -61,8 +61,8 @@ public class DivisionDto {
         return director;
     }
 
-    public String getParentDivision() {
-        return parentDivision;
+    public String getParentDivisionId() {
+        return parentDivisionId;
     }
 
     //copied from provided example codelab02 switchfully orm codelabs

@@ -13,8 +13,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({FIELD})
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = ParentDivisionValidator.class)
-public @interface ParentDivisionConstraint {
+@Constraint(validatedBy = parentDivisionIdValidator.class)
+public @interface parentDivisionIdConstraint {
 
     String message() default "Invalid parent id.";
 

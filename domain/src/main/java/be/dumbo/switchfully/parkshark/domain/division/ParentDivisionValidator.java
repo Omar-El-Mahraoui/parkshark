@@ -12,13 +12,13 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.stream.Collectors;
 
 @Named
-public class ParentDivisionValidator implements ConstraintValidator<ParentDivisionConstraint, Integer> {
+public class parentDivisionIdValidator implements ConstraintValidator<parentDivisionIdConstraint, Integer> {
 
     @Inject
     private DivisionRepository divisionRepository;
 
     @Override
-    public void initialize(ParentDivisionConstraint constraintAnnotation) {
+    public void initialize(parentDivisionIdConstraint constraintAnnotation) {
 
     }
 

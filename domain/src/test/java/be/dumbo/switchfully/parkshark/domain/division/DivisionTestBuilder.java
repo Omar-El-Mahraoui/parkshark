@@ -48,8 +48,8 @@ public class DivisionTestBuilder extends Builder<Division> {
         return this;
     }
 
-    public DivisionTestBuilder withParentDivision(String parentDivision) {
-        divisionBuilder.withParentDivision(parentDivision);
+    public DivisionTestBuilder withParentDivisionId(String parentDivisionId) {
+        divisionBuilder.withParentDivisionId(parentDivisionId);
         return this;
     }
 }

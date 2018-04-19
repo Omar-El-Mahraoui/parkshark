@@ -19,7 +19,7 @@ public class DivisionMapper extends Mapper<DivisionDto,Division> {
                 .withOriginalName(division.getOriginalName())
                 .withName(division.getName())
                 .withDirector(division.getDirector())
-                .withParentDivision(division.getParentDivision());
+                .withParentDivisionId(division.getParentDivisionId());
     }
 
     @Override
@@ -28,7 +28,7 @@ public class DivisionMapper extends Mapper<DivisionDto,Division> {
                 .withOriginalName(divisionDto.getOriginalName())
                 .withName(divisionDto.getName())
                 .withDirector(divisionDto.getDirector())
-                .withParentDivision(divisionDto.getParentDivision())
+                .withParentDivisionId(divisionDto.getParentDivisionId())
                 .build();
     }
 }

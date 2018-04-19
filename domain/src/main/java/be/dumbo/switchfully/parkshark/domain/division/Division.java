@@ -45,18 +45,18 @@ public class Division {
     private String director;
 
     //http://www.baeldung.com/spring-mvc-custom-validator
-    @Column(name="DIVISIONS_PARENT_DIVISION")
-    private String parentDivision;
+    @Column(name="DIVISIONS_PARENT_DIVISION_ID")
+    private String parentDivisionId;
 
     private Division() {
     }
 
     private Division(DivisionBuilder divisionBuilder) {
-        this.id = divisionBuilder.getId();
-        this.name = divisionBuilder.getName();
-        this.originalName = divisionBuilder.getOriginalName();
-        this.director = divisionBuilder.getDirector();
-        this.parentDivision = divisionBuilder.getParentDivision();
+        this.id = divisionBuilder.id;
+        this.name = divisionBuilder.name;
+        this.originalName = divisionBuilder.originalName;
+        this.director = divisionBuilder.director;
+        this.parentDivisionId = divisionBuilder.parentDivisionId;
     }
 
     public String getName() {
@@ -71,8 +71,8 @@ public class Division {
         return director;
     }
 
-    public String getParentDivision() {
-        return parentDivision;
+    public String getParentDivisionId() {
+        return parentDivisionId;
     }
 
     public String getId() {
@@ -101,7 +101,7 @@ public class Division {
         private String name;
         private String originalName;
         private String director;
-        private String parentDivision;
+        private String parentDivisionId;
 
         private DivisionBuilder() {}
 
@@ -134,29 +134,9 @@ public class Division {
             return this;
         }
 
-        public DivisionBuilder withParentDivision(String parentDivision) {
-            this.parentDivision = parentDivision;
+        public DivisionBuilder withParentDivisionId(String parentDivisionId) {
+            this.parentDivisionId = parentDivisionId;
             return this;
-        }
-
-        private String getId() {
-            return id;
-        }
-
-        private String getName() {
-            return name;
-        }
-
-        private String getOriginalName() {
-            return originalName;
-        }
-
-        private String getDirector() {
-            return director;
-        }
-
-        private String getParentDivision() {
-            return parentDivision;
         }
     }
 }
