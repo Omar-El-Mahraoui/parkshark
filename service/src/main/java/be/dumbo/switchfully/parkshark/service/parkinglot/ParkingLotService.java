@@ -6,6 +6,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.inject.Named;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 
 // validate javax validation beans: https://docs.jboss.org/hibernate/validator/4.1/reference/en-US/html/validator-customconstraints.html#validator-customconstraints-using
@@ -26,7 +27,7 @@ public class ParkingLotService {
         return parkingLotRepository.getAll();
     }
 
-    public ParkingLot createParkingLot(ParkingLot parkingLot) {
+    public ParkingLot createParkingLot(@Valid ParkingLot parkingLot) {
         return parkingLotRepository.save(parkingLot);
     }
 }

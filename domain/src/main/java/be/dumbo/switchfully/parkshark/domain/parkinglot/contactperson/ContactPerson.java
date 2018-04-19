@@ -52,7 +52,7 @@ public class ContactPerson {
         return name;
     }
 
-    public PhoneNumber getMobilePhoneNumber() {
+    public PhoneNumber getPhoneNumber() {
         return phoneNumber;
     }
 
