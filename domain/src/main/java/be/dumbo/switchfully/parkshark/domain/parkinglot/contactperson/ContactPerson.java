@@ -10,27 +10,44 @@ import javax.validation.constraints.NotNull;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
-@Entity
-@Table(name = "CONTACT_PERSONS")
+@Embeddable
 public class ContactPerson {
 
-    @Id
+    /*@Id
     @Column(name="ID")
     @SequenceGenerator(name="contactPerson_seq", sequenceName = "CONTACT_PERSONS_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contactPerson_seq")
-    private Integer id;
+    private Integer id;*/
 
-    @Column(name = "NAME")
+    @Column(name = "CONTACT_PERSON_NAME")
+    @NotNull(message = "Name cannot be null.")
     private String name;
 
+    @NotNull(message = "Phone number cannot be null.")
+    // copied and adapted code from order-jpa-solution-switchfully
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "telephoneNumber", column = @Column(name = "CONTACT_PERSON_TELE_PHONE_NUMBER")),
+            @AttributeOverride(name = "mobilePhoneNumber", column = @Column(name = "CONTACT_PERSON_MOBILE_PHONE_NUMBER"))
+    })
     private PhoneNumber phoneNumber;
 
+    // copied and adapted code from order-jpa-solution-switchfully
     @Embedded
-    @NotNull
+    @AttributeOverrides({
+            @AttributeOverride(name = "complete", column = @Column(name = "CONTACT_PERSON_EMAIL"))
+    })
+    @NotNull(message = "Email cannot be null.")
     private Email email;
 
+    // copied and adapted code from order-jpa-solution-switchfully
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "streetName", column = @Column(name = "CONTACT_PERSON_STREET_NAME")),
+            @AttributeOverride(name = "streetNumber", column = @Column(name = "CONTACT_PERSON_STREET_NUMBER")),
+            @AttributeOverride(name = "postalCode", column = @Column(name = "CONTACT_PERSON_POSTAL_CODE")),
+            @AttributeOverride(name = "label", column = @Column(name = "CONTACT_PERSON_LABEL"))
+    })
     @NotNull(message = "Address cannot be null.")
     private Address address;
 

@@ -4,7 +4,9 @@ package be.dumbo.switchfully.parkshark.api.parkinglot.contactperson;
 
 public class EmailDto {
 
-    private String email;
+    private String localPart;
+    private String domain;
+    private String complete;
 
     private EmailDto() {}
 
@@ -12,12 +14,30 @@ public class EmailDto {
         return new EmailDto();
     }
 
-    public EmailDto withEmail(String email) {
-        this.email = email;
+    public EmailDto withLocalPart(String localPart) {
+        this.localPart = localPart;
         return this;
     }
 
-    public String getEmail() {
-        return email;
+    public EmailDto withDomain(String domain) {
+        this.domain = domain;
+        return this;
+    }
+
+    public EmailDto withComplete(String complete) {
+        this.complete = complete;
+        return this;
+    }
+
+    public String getLocalPart() {
+        return localPart;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public String getComplete() {
+        return complete;
     }
 }

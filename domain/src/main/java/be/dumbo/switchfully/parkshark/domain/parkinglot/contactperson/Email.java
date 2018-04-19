@@ -64,6 +64,7 @@ public class Email {
 
         private String localPart;
         private String domain;
+        private String complete;
 
         private EmailBuilder() {}
 
@@ -83,6 +84,11 @@ public class Email {
 
         public EmailBuilder withDomain(String domain) {
             this.domain = domain;
+            return this;
+        }
+
+        public EmailBuilder withComplete(String complete) {
+            this.complete = complete;
             return this;
         }
     }

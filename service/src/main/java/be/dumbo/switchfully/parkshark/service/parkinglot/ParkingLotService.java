@@ -17,10 +17,12 @@ import java.util.List;
 public class ParkingLotService {
 
     private ParkingLotRepository parkingLotRepository;
+    private ParkingLotValidator parkingLotValidator;
 
     @Named
-    public ParkingLotService(ParkingLotRepository parkingLotRepository) {
+    public ParkingLotService(ParkingLotRepository parkingLotRepository, ParkingLotValidator parkingLotValidator) {
         this.parkingLotRepository = parkingLotRepository;
+        this.parkingLotValidator = parkingLotValidator;
     }
 
     public List<ParkingLot> getAllParkingLots() {
@@ -28,6 +30,9 @@ public class ParkingLotService {
     }
 
     public ParkingLot createParkingLot(@Valid ParkingLot parkingLot) {
+        if (!parkingLotValidator.isValidForCreation(parkingLot)) {
+            parkingLotValidator.throwInvalidStateException(parkingLot, "creation");
+        }
         return parkingLotRepository.save(parkingLot);
     }
 }

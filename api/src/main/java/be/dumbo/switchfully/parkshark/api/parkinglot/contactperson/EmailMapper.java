@@ -12,11 +12,17 @@ public class EmailMapper extends Mapper<EmailDto,Email>{
     @Override
     public EmailDto toDto(Email email) {
         return EmailDto.emailDto()
-                .withEmail(email.getComplete());
+                .withLocalPart(email.getLocalPart())
+                .withDomain(email.getDomain())
+                .withComplete(email.getComplete());
     }
 
     @Override
-    public Email toDomain(EmailDto dtoObject) {
-        return null;
+    public Email toDomain(EmailDto emailDto) {
+        return Email.EmailBuilder.email()
+                .withLocalPart(emailDto.getLocalPart())
+                .withDomain(emailDto.getDomain())
+                .withComplete(emailDto.getComplete())
+                .build();
     }
 }

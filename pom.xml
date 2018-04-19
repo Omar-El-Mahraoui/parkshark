@@ -14,6 +14,9 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring.boot.version>2.0.1.RELEASE</spring.boot.version>
+        <!--copied from order-jpa-solution switchfully-->
+        <skipTests>false</skipTests>
+        <skip.surefire.tests>${skipTests}</skip.surefire.tests>
     </properties>
 
     <modules>
@@ -136,7 +139,40 @@
             <scope>test</scope>
             <version>${spring.boot.version}</version>
         </dependency>
-
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <!--copied from order-jpa-solution switchfully-->
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- skips surefire tests without skipping failsafe tests. -->
+                    <skipTests>${skip.surefire.tests}</skipTests>
+                    <excludes>
+                        <exclude>**/*IntegrationTest.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>**/*IntegrationTest.java</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 
 </project>

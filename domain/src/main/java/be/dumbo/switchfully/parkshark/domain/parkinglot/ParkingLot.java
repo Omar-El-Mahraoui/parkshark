@@ -46,8 +46,15 @@ public class ParkingLot {
     private BigDecimal pricePerHourInEuro;
 
     // https://github.com/cegeka/switchfully/blob/solutions/03-databases/02-ORM/01-jpa/src/main/java/codelab04/be/switchfully/person/Person.java
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "contact_person_id", referencedColumnName = "id")
+    // copied and adapted code from order-jpa-solution-switchfully
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "localPart", column = @Column(name = "EMAIL_LOCAL_PART")),
+            @AttributeOverride(name = "domain", column = @Column(name = "EMAIL_DOMAIN")),
+            @AttributeOverride(name = "complete", column = @Column(name = "EMAIL_COMPLETE"))
+    })
+    //@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    //@JoinColumn(name = "contact_person_id", referencedColumnName = "id")
     @NotNull(message = "Contact person cannot be null.")
     private ContactPerson contactPerson;
 

@@ -5,6 +5,7 @@ package be.dumbo.switchfully.parkshark.api.parkinglot;
 import be.dumbo.switchfully.parkshark.service.parkinglot.ParkingLotService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,5 +33,12 @@ public class ParkingLotController {
         return parkingLotService.getAllParkingLots().stream()
                 .map(parkingLot -> parkingLotMapper.toDto(parkingLot))
                 .collect(Collectors.toList());
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ParkingLotDto createParkingLot(ParkingLotDto parkingLotDto) {
+        return parkingLotMapper.toDto(
+                parkingLotService.createParkingLot(
+                        parkingLotMapper.toDomain(parkingLotDto)));
     }
 }

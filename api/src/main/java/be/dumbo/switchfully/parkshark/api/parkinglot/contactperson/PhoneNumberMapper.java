@@ -18,6 +18,9 @@ public class PhoneNumberMapper extends Mapper<PhoneNumberDto,PhoneNumber>{
 
     @Override
     public PhoneNumber toDomain(PhoneNumberDto phoneNumberDto) {
-        return null;
+        return PhoneNumber.PhoneNumberBuilder.phoneNumber()
+                .withTelephoneNumber(phoneNumberDto.getTelephoneNumber())
+                .withMobilePhoneNumber(phoneNumberDto.getMobilePhoneNumber())
+                .build();
     }
 }

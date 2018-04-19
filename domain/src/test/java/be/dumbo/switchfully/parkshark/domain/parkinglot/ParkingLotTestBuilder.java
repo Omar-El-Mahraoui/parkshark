@@ -3,17 +3,17 @@ package be.dumbo.switchfully.parkshark.domain.parkinglot;
 //copied code from order solution switchfully
 
 import be.dumbo.switchfully.parkshark.domain.address.Address;
-import be.dumbo.switchfully.parkshark.domain.address.AddressTestBuilder;
 import be.dumbo.switchfully.parkshark.domain.division.Division;
-import be.dumbo.switchfully.parkshark.domain.division.DivisionTestBuilder;
 import be.dumbo.switchfully.parkshark.domain.parkinglot.ParkingLot.ParkingLotBuilder;
 import be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson.ContactPerson;
-import be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson.ContactPersonTestBuilder;
 import be.dumbo.switchfully.parkshark.infrastructure.builder.Builder;
 
 import java.math.BigDecimal;
 
+import static be.dumbo.switchfully.parkshark.domain.address.AddressTestBuilder.anAddress;
+import static be.dumbo.switchfully.parkshark.domain.division.DivisionTestBuilder.aDivision;
 import static be.dumbo.switchfully.parkshark.domain.parkinglot.ParkingLot.ParkingLotBuilder.parkingLot;
+import static be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson.ContactPersonTestBuilder.aContactPerson;
 
 public class ParkingLotTestBuilder extends Builder<ParkingLot> {
 
@@ -32,11 +32,11 @@ public class ParkingLotTestBuilder extends Builder<ParkingLot> {
     public static ParkingLotTestBuilder aParkingLot() {
         return new ParkingLotTestBuilder(parkingLot()
                         .withName("parkingLot1")
-                        .withDivision(DivisionTestBuilder.aDivision().build())
+                        .withDivision(aDivision().build())
                         .withCapacity(100)
                         .withPricePerHourInEuro(BigDecimal.valueOf(5))
-                        .withContactPerson(ContactPersonTestBuilder.aContactPerson().build())
-                        .withAddress(AddressTestBuilder.anAddress().build())
+                        .withContactPerson(aContactPerson().build())
+                        .withAddress(anAddress().build())
                         .withBuildingType(BuildingType.ABOVE_GROUND));
     }
 

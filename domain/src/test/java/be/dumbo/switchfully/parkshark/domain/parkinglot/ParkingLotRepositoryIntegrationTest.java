@@ -4,13 +4,11 @@ import be.dumbo.switchfully.parkshark.infrastructure.RepositoryIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 import static be.dumbo.switchfully.parkshark.domain.parkinglot.ParkingLotTestBuilder.aParkingLot;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Transactional
 public class ParkingLotRepositoryIntegrationTest extends RepositoryIntegrationTest{
 
     @Autowired
@@ -23,6 +21,18 @@ public class ParkingLotRepositoryIntegrationTest extends RepositoryIntegrationTe
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }*/
+
+    @Test
+    public void deleteAll_givenANonEmptyParkingLotTable_thenDeleteAllParkingLotsFromTheTable() {
+        //GIVEN
+        parkingLotRepository.save(aParkingLot().build());
+
+        //WHEN
+        parkingLotRepository.deleteAll();
+
+        //THEN
+        assertThat(parkingLotRepository.getAll()).isEmpty();
+    }
 
     @Test
     public void save_happyPath_thenSaveTheParkingLotInDatabaseAndReturnTheParkingLotWithItsId() {
@@ -57,18 +67,19 @@ public class ParkingLotRepositoryIntegrationTest extends RepositoryIntegrationTe
     }*/
 
     @Test
-    public void getAll_returnAllParkingLotsInTheDatabase() {
+    public void getAll_thenReturnAllParkingLotsInTheDatabase() {
         //GIVEN
         parkingLotRepository.deleteAll();
-        parkingLotRepository.save(aParkingLot().build());
-        parkingLotRepository.save(aParkingLot().build());
-        parkingLotRepository.save(aParkingLot().build());
+        ParkingLot parkingLot1 = parkingLotRepository.save(aParkingLot().build());
+        ParkingLot parkingLot2 = parkingLotRepository.save(aParkingLot().build());
+        ParkingLot parkingLot3 = parkingLotRepository.save(aParkingLot().build());
 
         //WHEN
         List<ParkingLot> parkingLotsReturned = parkingLotRepository.getAll();
 
         //THEN
         assertThat(parkingLotsReturned).hasSize(3);
+        assertThat(parkingLotsReturned).containsExactlyInAnyOrder(parkingLot1,parkingLot2,parkingLot3);
     }
 
 
