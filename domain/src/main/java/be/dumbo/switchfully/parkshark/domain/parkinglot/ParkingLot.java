@@ -41,9 +41,8 @@ public class ParkingLot {
     @NotNull(message = "Price per hour in euro cannot be null.")
     private BigDecimal pricePerHourInEuro;
 
-    @OneToOne
-    @JoinColumn(name = "CONTACT_PERSON_ID")
     @NotNull(message = "Contact person cannot be null.")
+    @Column(name = "CONTACT_PERSON_ID")
     private String contactPersonId;
 
     // copied and adapted code from order-jpa-solution-switchfully
