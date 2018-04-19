@@ -23,33 +23,39 @@ CREATE TABLE DIVISIONS
   );
 
 ----CONTACT_PERSONS
---DROP TABLE contact_persons;
---CREATE TABLE contact_persons
---(
---  id                  NUMBER PRIMARY KEY,
---  name                VARCHAR2(100),
---  telephone_number    VARCHAR2(100),
---  mobile_phone_number VARCHAR2(100),
---  email               VARCHAR2(100),
---  street_name         VARCHAR2(100),
---  street_number       VARCHAR2(100),
---  postal_code         VARCHAR2(100),
---  label               VARCHAR2(100)
---);
+--DROP TABLE CONTACT_PERSONS;
+--CREATE TABLE CONTACT_PERSONS
+--  (
+--    ID                  VARCHAR2(100) NOT NULL,
+--    NAME                VARCHAR2(100) NOT NULL,
+--    TELEPHONE_NUMBER    VARCHAR2(100) NOT NULL,
+--    MOBILE_PHONE_NUMBER VARCHAR2(100) NOT NULL,
+--    EMAIL               VARCHAR2(100) NOT NULL,
+--    STREET_NAME         VARCHAR2(100) NOT NULL,
+--    STREET_NUMBER       VARCHAR2(100) NOT NULL,
+--    POSTALCODE          VARCHAR2(100) NOT NULL,
+--    LABEL               VARCHAR2(100) NOT NULL,
+--    CONSTRAINT CONTACT_PERSONS_PK PRIMARY KEY (ID)
+--  );
 
 ----PARKINGLOTS
 --DROP TABLE PARKINGLOTS;
 --CREATE TABLE PARKINGLOTS
 --  (
---    PARKINGLOTS_ID                     VARCHAR2(100) NOT NULL,
---    PARKINGLOTS_NAME                   VARCHAR2(100) NOT NULL,
---    PARKINGLOTS_DIVISION_ID            VARCHAR2(100) NOT NULL,
---    PARKINGLOTS_CAPACITY               INT NOT NULL,
---    building_type                      VARCHAR2(100) NOT NULL,
---    PARKINGLOTS_PRICE_PER_HOUR_IN_EURO DECIMAL(5,2) NOT NULL,
---    PARKINGLOTS_CONTACT_PERSON_ID      VARCHAR2(100) NOT NULL,
---    CONSTRAINT fk_division_id FOREIGN KEY (division_id) REFERENCES divisions(id),
---    CONSTRAINT fk_contact_person_id FOREIGN KEY (contact_person_id) REFERENCES contact_persons(id)
+--    ID                     VARCHAR2(100) NOT NULL,
+--    NAME                   VARCHAR2(100) NOT NULL,
+--    DIVISION_ID            VARCHAR2(100) NOT NULL,
+--    CAPACITY               INT NOT NULL,
+--    PRICE_PER_HOUR_IN_EURO DECIMAL(5,2) NOT NULL,
+--    CONTACT_PERSON_ID      VARCHAR2(100) NOT NULL,
+--    BULDING_TYPE           VARCHAR2(100) NOT NULL,
+--    STREET_NAME            VARCHAR2(100) NOT NULL,
+--    STREET_NUMBER          VARCHAR2(100) NOT NULL,
+--    POSTALCODE             VARCHAR2(100) NOT NULL,
+--    LABEL                  VARCHAR2(100) NOT NULL,
+--    CONSTRAINT PARKINGLOTS_PK PRIMARY KEY (ID),
+--    CONSTRAINT FK_DIVISION_ID FOREIGN KEY (DIVISION_ID) REFERENCES DIVISIONS(ID),
+--    CONSTRAINT FK_CONTACT_PERSON_ID FOREIGN KEY (CONTACT_PERSON_ID) REFERENCES CONTACT_PERSONS(ID)
 --  );
 
 ---- PHONE_NUMBERS

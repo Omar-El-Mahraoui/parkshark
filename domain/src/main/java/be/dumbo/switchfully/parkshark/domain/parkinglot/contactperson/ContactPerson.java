@@ -1,4 +1,3 @@
-/*
 package be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson;
 
 import be.dumbo.switchfully.parkshark.domain.address.Address;
@@ -11,10 +10,15 @@ import javax.validation.constraints.NotNull;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
-@Embeddable
+@Entity
+@Table(name = "CONTACT_PERSONS")
 public class ContactPerson {
 
-    @Column(name = "CONTACT_PERSON_NAME")
+    @Id
+    @Column(name = "ID")
+    private String id;
+
+    @Column(name = "NAME")
     @NotNull(message = "Name cannot be null.")
     private String name;
 
@@ -22,15 +26,15 @@ public class ContactPerson {
     // copied and adapted code from order-jpa-solution-switchfully
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "telephoneNumber", column = @Column(name = "CONTACT_PERSON_TELE_PHONE_NUMBER")),
-            @AttributeOverride(name = "mobilePhoneNumber", column = @Column(name = "CONTACT_PERSON_MOBILE_PHONE_NUMBER"))
+            @AttributeOverride(name = "telephoneNumber", column = @Column(name = "TELEPHONE_NUMBER")),
+            @AttributeOverride(name = "mobilePhoneNumber", column = @Column(name = "MOBILE_PHONE_NUMBER"))
     })
     private PhoneNumber phoneNumber;
 
     // copied and adapted code from order-jpa-solution-switchfully
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "complete", column = @Column(name = "CONTACT_PERSON_EMAIL"))
+            @AttributeOverride(name = "complete", column = @Column(name = "EMAIL"))
     })
     @NotNull(message = "Email cannot be null.")
     private Email email;
@@ -38,10 +42,10 @@ public class ContactPerson {
     // copied and adapted code from order-jpa-solution-switchfully
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "streetName", column = @Column(name = "CONTACT_PERSON_STREET_NAME")),
-            @AttributeOverride(name = "streetNumber", column = @Column(name = "CONTACT_PERSON_STREET_NUMBER")),
-            @AttributeOverride(name = "postalCode", column = @Column(name = "CONTACT_PERSON_POSTAL_CODE")),
-            @AttributeOverride(name = "label", column = @Column(name = "CONTACT_PERSON_LABEL"))
+            @AttributeOverride(name = "streetName", column = @Column(name = "STREET_NAME")),
+            @AttributeOverride(name = "streetNumber", column = @Column(name = "STREET_NUMBER")),
+            @AttributeOverride(name = "postalCode", column = @Column(name = "POSTAL_CODE")),
+            @AttributeOverride(name = "label", column = @Column(name = "LABEL"))
     })
     @NotNull(message = "Address cannot be null.")
     private Address address;
@@ -127,4 +131,3 @@ public class ContactPerson {
     }
 
 }
-*/

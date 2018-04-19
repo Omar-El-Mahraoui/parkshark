@@ -1,9 +1,6 @@
-/*
 package be.dumbo.switchfully.parkshark.domain.parkinglot;
 
 import be.dumbo.switchfully.parkshark.domain.address.Address;
-import be.dumbo.switchfully.parkshark.domain.division.Division;
-import be.dumbo.switchfully.parkshark.domain.parkinglot.contactperson.ContactPerson;
 import be.dumbo.switchfully.parkshark.infrastructure.builder.Builder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -23,32 +20,40 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 public class ParkingLot {
 
     @Id
-    @Column(name="PARKINGLOTS_ID")
+    @Column(name="ID")
     private String id;
 
-    @Column(name = "PARKINGLOTS_NAME")
+    @Column(name = "NAME")
     @NotNull(message = "Name cannot be null.")
     @NotBlank(message = "Name must be filled in.")
     private String name;
 
     @NotNull(message = "Division id cannot be null.")
     @NotBlank(message = "Division id must be filled in.")
-    @Column(name = "PARKINGLOTS_DIVISION_ID")
+    @Column(name = "DIVISION_ID")
     private String divisionId;
 
-    @Column(name = "PARKINGLOTS_CAPACITY")
+    @Column(name = "CAPACITY")
     @NotNull(message = "Capacity cannot be null.")
     private Integer capacity;
 
-    @Column(name = "PARKINGLOTS_PRICE_PER_HOUR_IN_EURO")
+    @Column(name = "PRICE_PER_HOUR_IN_EURO")
     @NotNull(message = "Price per hour in euro cannot be null.")
     private BigDecimal pricePerHourInEuro;
 
-    @Embedded
+    @OneToOne
+    @JoinColumn(name = "CONTACT_PERSON_ID")
     @NotNull(message = "Contact person cannot be null.")
-    private ContactPerson contactPerson;
+    private String contactPersonId;
 
+    // copied and adapted code from order-jpa-solution-switchfully
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "streetName", column = @Column(name = "STREET_NAME")),
+            @AttributeOverride(name = "streetNumber", column = @Column(name = "STREET_NUMBER")),
+            @AttributeOverride(name = "postalCode", column = @Column(name = "POSTAL_CODE")),
+            @AttributeOverride(name = "label", column = @Column(name = "LABEL"))
+    })
     @NotNull(message = "Address cannot be null.")
     private Address address;
 
@@ -63,10 +68,10 @@ public class ParkingLot {
     private ParkingLot(ParkingLotBuilder parkingLotBuilder) {
         this.id = parkingLotBuilder.id;
         this.name = parkingLotBuilder.name;
-        this.division = parkingLotBuilder.division;
+        this.divisionId = parkingLotBuilder.divisionId;
         this.capacity = parkingLotBuilder.capacity;
         this.pricePerHourInEuro = parkingLotBuilder.pricePerHourInEuro;
-        this.contactPerson = parkingLotBuilder.contactPerson;
+        this.contactPersonId = parkingLotBuilder.contactPersonId;
         this.address = parkingLotBuilder.address;
         this.buildingType = parkingLotBuilder.buildingType;
     }
@@ -79,8 +84,8 @@ public class ParkingLot {
         return name;
     }
 
-    public Division getDivision() {
-        return division;
+    public String getDivisionId() {
+        return divisionId;
     }
 
     public Integer getCapacity() {
@@ -91,8 +96,8 @@ public class ParkingLot {
         return pricePerHourInEuro;
     }
 
-    public ContactPerson getContactPerson() {
-        return contactPerson;
+    public String getContactPersonId() {
+        return contactPersonId;
     }
 
     public Address getAddress() {
@@ -123,10 +128,10 @@ public class ParkingLot {
 
         private String id;
         private String name;
-        private Division division;
+        private String divisionId;
         private Integer capacity;
         private BigDecimal pricePerHourInEuro;
-        private ContactPerson contactPerson;
+        private String contactPersonId;
         private Address address;
         private BuildingType buildingType;
 
@@ -146,8 +151,8 @@ public class ParkingLot {
             return this;
         }
 
-        public ParkingLotBuilder withDivision(Division division) {
-            this.division = division;
+        public ParkingLotBuilder withDivisionId(String divisionId) {
+            this.divisionId = divisionId;
             return this;
         }
 
@@ -161,8 +166,8 @@ public class ParkingLot {
             return this;
         }
 
-        public ParkingLotBuilder withContactPerson(ContactPerson contactPerson) {
-            this.contactPerson = contactPerson;
+        public ParkingLotBuilder withContactPersonId(String contactPersonId) {
+            this.contactPersonId = contactPersonId;
             return this;
         }
 
@@ -183,4 +188,3 @@ public class ParkingLot {
     }
 
 }
-*/
